@@ -70,12 +70,12 @@ function formatSubmissionsCSV() {
     // add headers to be first row in spreadsheet
     processedSubmissionRows.push(headerRow.join(","));
 
-    // get and run through all clinical site containers on view-entries page
-    for (const currSiteContainer of document.querySelectorAll(".clinical-site-container")) {
+    // get and run through all view site containers on view-entries page
+    for (const currSiteContainer of document.querySelectorAll(".view-site-container")) {
         // get the submissions container from within site container
         const submissionContainer = currSiteContainer.querySelector(".submission-container");
 
-        // get the current clinical site's name
+        // get the current view site's name
         const clinicalSiteName = submissionContainer.querySelector("h1").innerText;
 
         // process the current table
@@ -83,15 +83,15 @@ function formatSubmissionsCSV() {
     }
   
     // once all submissions on page have been formatted and placed within array,
-    // return all clinical site rows within a string, separating each row by a newline marker
+    // return all view site rows within a string, separating each row by a newline marker
     return processedSubmissionRows.join("\n");
 } 
 
 /**
  * Formats the submission rows within the given \<tbody\> and adds them to the processedSubmissionRows array
  *
- * @param {HTMLElement} tableBody The \<tbody\> corresponding to the clinical site currently being processed
- * @param {string} clinicalSiteName The name of the clinical site currently being processed
+ * @param {HTMLElement} tableBody The \<tbody\> corresponding to the view site currently being processed
+ * @param {string} clinicalSiteName The name of the view site currently being processed
  */
 function processTableRows(currTbody, clinicalSiteName) {
     /**
@@ -111,7 +111,7 @@ function processTableRows(currTbody, clinicalSiteName) {
  * formatted for a .csv spreadsheet
  *
  * @param {HTMLElement} currRow The \<tr\> element being processed
- * @param {string} clinicalSiteName The name of the clinical site the submission row belongs to
+ * @param {string} clinicalSiteName The name of the view site the submission row belongs to
  * @returns {string} A string representing the submission row, formatted for a .csv spreadsheet
  */
 function processSubmissionRow(currRow, clinicalSiteName) {
@@ -120,7 +120,7 @@ function processSubmissionRow(currRow, clinicalSiteName) {
      */
     const submissionColumns = [];
 
-    // add the given clinical site name to row in first column
+    // add the given view site name to row in first column
     submissionColumns.push(clinicalSiteName);
 
     // get and run through all rating (number) columns in the current row

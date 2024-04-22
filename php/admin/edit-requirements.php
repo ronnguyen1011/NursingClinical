@@ -66,7 +66,7 @@
                     </div>
                     <?php 
                         // generate scrollspy to track and link requirements
-                        echo generateBootstrapScrollspy($allRequirementTitles, "/sprint-5/requirements.php");
+                        echo generateBootstrapScrollspy($allRequirementTitles, "/view/requirements.php");
                     ?>
                 </div>
                 <div class="col-12 col-md-9 col-lg-9">

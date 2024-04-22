@@ -6,12 +6,12 @@
     $currPageTitle = "View Entries";
 
 	/**
-	 * The name of the current clinical site
+	 * The name of the current view site
 	 */
 	$currClinicalSite = "";
 	
 	/**
-	 * The number of submissions processed from DB belonging to the current clinical site
+	 * The number of submissions processed from DB belonging to the current view site
 	 */
 	$currSubmissionCount = 0;
 
@@ -21,13 +21,13 @@
 	$totalSubmissionCount = 0;
 
 	/**
-	 * An array containing the total ratings for each aspect of the current clinical site:
+	 * An array containing the total ratings for each aspect of the current view site:
 	 * [Enjoyed Site, Staff Supportive, Site Learning Objectives, Preceptor Learning Objectives, Recommend Site]
 	 */
 	$ratingTotals = array(0, 0, 0, 0, 0);
 
 	/**
-	 * An array containing formatted submission rows belonging to the current clinical site
+	 * An array containing formatted submission rows belonging to the current view site
 	 */
 	$formattedSubmissionRows = array(); 
 
@@ -43,7 +43,7 @@
      */
 	$allClinicalSiteCards = array();
 
-	// get all experience form submissions from DB, ordered by clinical site, 
+	// get all experience form submissions from DB, ordered by view site,
 	// with newest submissions at the top
 	$allSubmissions = executeQuery("SELECT * 
 									FROM ExperienceFormSubmissions 
@@ -51,7 +51,7 @@
 
 	// run through all returned submissions
 	while ($currSubmission = mysqli_fetch_assoc($allSubmissions)) {
-		// get the current submission's corresponding clinical site
+		// get the current submission's corresponding view site
 		$siteAttended = $currSubmission["SiteAttended"];
 
 		/**
@@ -76,12 +76,12 @@
 		}
 
 		// if the current row belongs to a different 
-		// clinical site than the one tracked
+		// view site than the one tracked
 		if($currClinicalSite != $siteAttended) {
-			// save the name of the current clinical site to be used for scrollspy
+			// save the name of the current view site to be used for scrollspy
 			$allClinicalSiteNames[] = $currClinicalSite;
 
-			//  save the data for the previous clinical site in a generated display card
+			//  save the data for the previous view site in a generated display card
 			$allClinicalSiteCards[] = generateClinicalSiteDisplay($formattedSubmissionRows
 																	, $currClinicalSite
 																	, $currSubmissionCount);
@@ -108,14 +108,14 @@
 						WHERE SubmissionID = {$currSubmission['SubmissionID']}");
 
 		// format the data of the current submission row, 
-		// and track with other rows belonging to the current clinical site
+		// and track with other rows belonging to the current view site
 		$formattedSubmissionRows[] = generateFormattedSubmissionRow($currSubmission);
 	}
 
-	// save the name of the current clinical site to be used for scrollspy
+	// save the name of the current view site to be used for scrollspy
 	$allClinicalSiteNames[] = $currClinicalSite;
 
-	// save the data for the previous clinical site in a generated display card
+	// save the data for the previous view site in a generated display card
 	$allClinicalSiteCards[] = generateClinicalSiteDisplay($formattedSubmissionRows
 															, $currClinicalSite
 															, $currSubmissionCount);
@@ -153,10 +153,10 @@
 											</svg>
 										</a>";
 
-						// generate scrollspy to track and link clinical sites, including the
+						// generate scrollspy to track and link view sites, including the
 						// export button above the links
 						echo generateBootstrapScrollspy($allClinicalSiteNames
-														, "/sprint-5/experience.php"
+														, "/view/experience.php"
 														, $exportButton);
 					?>
 				</div>
@@ -167,7 +167,7 @@
 						 */
 						$scrollspyElementsCount = 0;
 
-						// run through and display all generated clinical site cards
+						// run through and display all generated view site cards
 						foreach ($allClinicalSiteCards as $currClinicalSiteCard) {
 							echo $currClinicalSiteCard;
 						}
@@ -202,12 +202,12 @@
 	/**
 	 * Adds the values in the given $ratings array to the corresponding rating total in $ratingTotals
 	 * @param array $ratings An array containing the rating columns of the current experience form submission
-	 * @global array $ratingTotals An array containing the total ratings for each aspect of the current clinical site:
+	 * @global array $ratingTotals An array containing the total ratings for each aspect of the current view site:
 	 * [Enjoyed Site, Staff Supportive, Site Learning Objectives, Preceptor Learning Objectives, Recommend Site]
 	 */
 	function updateRatingTotals($ratings) {
 		/**
-		 * An array containing the total ratings for each aspect of the current clinical site:
+		 * An array containing the total ratings for each aspect of the current view site:
 	 	 * [Enjoyed Site, Staff Supportive, Site Learning Objectives, Preceptor Learning Objectives, Recommend Site]
 		 */
 		global $ratingTotals;
@@ -220,12 +220,12 @@
 	/**
 	 * Sets all values in the $ratingTotals array to 0 in preparation to track the totals of a new submission
 	 *
-	 * @global array $ratingTotals An array containing the total ratings for each aspect of the current clinical site:
+	 * @global array $ratingTotals An array containing the total ratings for each aspect of the current view site:
 	 * [Enjoyed Site, Staff Supportive, Site Learning Objectives, Preceptor Learning Objectives, Recommend Site]
 	 */
 	function resetRatingTotals() {
 		/**
-		 * An array containing the total ratings for each aspect of the current clinical site:
+		 * An array containing the total ratings for each aspect of the current view site:
 	 	 * [Enjoyed Site, Staff Supportive, Site Learning Objectives, Preceptor Learning Objectives, Recommend Site]
 		 */
 		global $ratingTotals;
@@ -296,13 +296,13 @@
 
 	/**
 	 * Generates a Bootstrap Modal displaying the given feedback (if any). As both fields are optional, only the sections given (not empty) are displayed. If both fields are given as empty, a simple "N/A" is displayed instead
-	 * @param string $siteOrStaffFeedback Feedback regarding the clinical site or the staff working there (Optional)
-	 * @param string $instructorFeedback Feedback regarding the students instructor at the clinical site (Optional)
+	 * @param string $siteOrStaffFeedback Feedback regarding the view site or the staff working there (Optional)
+	 * @param string $instructorFeedback Feedback regarding the students instructor at the view site (Optional)
 	 * @global int $totalSubmissionCount Used for Modal ID
 	 * @return string a Bootstrap modal displaying the given feedback (if any), along with a corresponding toggle button; otherwise "N/A"
 	 */
 	function displayFeedback($siteOrStaffFeedback, $instructorFeedback) {
-		// grab the clinical site count for the modal ID
+		// grab the view site count for the modal ID
 		global $totalSubmissionCount;
 
 		// if feedback was given
@@ -319,15 +319,15 @@
 
 	/**
 	 * Generates and returns a Bootstrap card containing the following content, generated using the given data:
-	 * A header displaying the site name, a table containing the given submission rows, and a section of average ratings for the current clinical site at the bottom
-	 * @param array $formattedSubmissionRows The submission rows pulled from the DB belonging to the current clinical site, formatted appropriately within HTML table rows
-	 * @param string $clinicalSiteName The name of the current clinical site
-	 * @param int $submissionCount The number of submissions belonging to the current clinical site 
+	 * A header displaying the site name, a table containing the given submission rows, and a section of average ratings for the current view site at the bottom
+	 * @param array $formattedSubmissionRows The submission rows pulled from the DB belonging to the current view site, formatted appropriately within HTML table rows
+	 * @param string $clinicalSiteName The name of the current view site
+	 * @param int $submissionCount The number of submissions belonging to the current view site
 	 * @return string
 	 */
 	function generateClinicalSiteDisplay($formattedSubmissionRows, $clinicalSiteName, $submissionCount) {
 		/**
-		 * An array containing the total ratings for each aspect of the current clinical site:
+		 * An array containing the total ratings for each aspect of the current view site:
 	     * [Enjoyed Site, Staff Supportive, Site Learning Objectives, Preceptor Learning Objectives, Recommend Site]
 		 */
 		global $ratingTotals;
@@ -343,13 +343,13 @@
         // another element is tracked by scrollspy
         $scrollspyElementsCount++;
 
-		// generate clinical site averages using given data
+		// generate view site averages using given data
 		$averageRatings = generateRatingAverages($ratingTotals, $submissionCount);
 
 		$editModal = generateEditSiteNameModal($clinicalSiteName);
 
 		// generate and return table using given data
-		return "<div class='card mb-3 p-3 table-responsive clinical-site-container' id='spy-{$scrollspyElementsCount}'>
+		return "<div class='card mb-3 p-3 table-responsive view-site-container' id='spy-{$scrollspyElementsCount}'>
 					<div class='container submission-container'>
 						<div class='d-flex justify-content-center align-items-center mb-3 gap-1'>
 							<h1 class='text-center mb-0'>
@@ -411,8 +411,8 @@
 
 	/**
 	 * Generates a Bootstrap Modal displaying the given feedback. As both fields are optional, only the sections given (not empty) are displayed
-	 * @param string $siteOrStaffFeedback Feedback regarding the clinical site or the staff working there (Optional)
-	 * @param string $instructorFeedback Feedback regarding the students instructor at the clinical site (Optional)
+	 * @param string $siteOrStaffFeedback Feedback regarding the view site or the staff working there (Optional)
+	 * @param string $instructorFeedback Feedback regarding the students instructor at the view site (Optional)
 	 * @global int $totalSubmissionCount Used for Modal ID
 	 * @return string a Bootstrap modal displaying the given feedback
 	 */
@@ -438,13 +438,13 @@
 	}
 
 	/**
-	 * Takes the total rating values for each aspect of a clinical site, calculates the average for each rating using the calculateRatingAverages function, and formats the result as follows: 
-	 * A heading of "Average Ratings", a table with column headers, and a single row containing the average ratings for each aspect of the clinical site
+	 * Takes the total rating values for each aspect of a view site, calculates the average for each rating using the calculateRatingAverages function, and formats the result as follows:
+	 * A heading of "Average Ratings", a table with column headers, and a single row containing the average ratings for each aspect of the view site
 	 * 
-	 * @param int $submissionCount The number of submissions belonging to the current clinical site 
-	 * @param array $ratingTotals An array containing the total ratings for each aspect of the current clinical site:
+	 * @param int $submissionCount The number of submissions belonging to the current view site
+	 * @param array $ratingTotals An array containing the total ratings for each aspect of the current view site:
 	 * [Enjoyed Site, Staff Supportive, Site Learning Objectives, Preceptor Learning Objectives, Recommend Site]
-	 * @return string HTML content representing the average ratings for each aspect of the clinical site
+	 * @return string HTML content representing the average ratings for each aspect of the view site
 	 */
 	function generateRatingAverages($ratingTotals, $submissionCount) {
 		// calculate and generate the average for each rating, format as a corresponding string of ★'s
@@ -481,13 +481,13 @@
 	}
 
 	/**
-	 * Calculates the average rating given to each aspect of the current clinical site based on the total of each rating and the number of submissions
+	 * Calculates the average rating given to each aspect of the current view site based on the total of each rating and the number of submissions
 	 * 
 	 * Returns an array containing a string made up of ★'s corresponding to each calculated rating average
 	 * For example an average rating of 3 would result in "★★★"
-	 * @param array $ratingTotals An array containing the total ratings for each aspect of the current clinical site:
+	 * @param array $ratingTotals An array containing the total ratings for each aspect of the current view site:
 	 * [Enjoyed Site, Staff Supportive, Site Learning Objectives, Preceptor Learning Objectives, Recommend Site]
-	 * @param int $submissionCount The number of submissions belonging to the current clinical site 
+	 * @param int $submissionCount The number of submissions belonging to the current view site
 	 * @return array an array containing a string made up of ★'s corresponding to each calculated rating average
 	 */
 	function calculateRatingAverages($ratingTotals, $submissionCount) {

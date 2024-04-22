@@ -1,7 +1,7 @@
 <?php 
     // get access to all PHP helpers
-    require_once("/home/geckosgr/public_html/initial.php");
-    
+    require_once("/home/nguyenro/public_html/initial.php");
+
     // store the current page's title for dynamic HTML generation
     $currPageTitle = "Contact";
 ?>
@@ -11,13 +11,13 @@
 <head>
     <?php 
         // include standard nursing header metadata
-        require_once("../php/layouts/nursing-metadata.php");
+        require_once(LAYOUTS_PATH . "/nursing-metadata.php");
     ?>
 </head>
 <body>
     <?php 
         // display site navigation
-        require_once("../php/layouts/navigation-sprint-3.php");
+        require_once(LAYOUTS_PATH . "/navigation-sprint-5.php");
     ?>
     <main class="container" id="contact">
         <div class="row">
@@ -27,7 +27,7 @@
                 <h1 class="card col-12 py-3 mb-1 text-center">
                     Contact
                 </h1>
-                <form class="mb-3" action="/php/send-email.php" method="post" id="contact-form">
+                <form action="/php/send-email.php" method="post" id="contact-form">
                     <div class="card p-3 my-1">
                         <div class="contact form-floating">
                             <input type="text" class="form-control" id="name" name="name"
@@ -56,6 +56,14 @@
                     </div>
                     <div class="card p-3 my-1">
                         <div class="contact form-floating">
+                            <label for="programName"></label><input type="text" class="form-control" id="programName" name="programName" placeholder="Program Name" required>
+                            <label for="Program Name">
+                                Program Name <?php echo displayRequired(); ?>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card p-3 my-1">
+                        <div class="contact form-floating">
                             <textarea class="form-control" id="message" name="message"
                                 placeholder="" required></textarea>
                             <label for="message">
@@ -72,5 +80,9 @@
             </div>
         </div>
     </main>
+    <?php 
+        // display site footer
+        require_once(LAYOUTS_PATH . "/nursing-footer.php");
+    ?>
 </body>
 </html>

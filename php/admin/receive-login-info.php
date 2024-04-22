@@ -39,7 +39,7 @@
                             $_SESSION["Admin"] = true;
 
                             // display success and link to requirements page
-                            echo generateMessageWithLink("/sprint-5/requirements.php", "Continue",
+                            echo generateMessageWithLink("/view/requirements.php", "Continue",
                                                         "Logged In successfully");
 
                         }

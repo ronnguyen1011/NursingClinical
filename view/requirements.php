@@ -1,8 +1,8 @@
 <?php 
     // get access to all PHP helpers
-    require_once("/home/geckosgr/public_html/initial.php");
+    require_once("/home/nguyenro/public_html/initial.php");
 
-    // save the current pages name to session
+    // store the current page's title for dynamic HTML generation
     $currPageTitle = "Clinical Requirements";
 ?>
 
@@ -17,13 +17,13 @@
 <body>
     <?php 
         // display site navigation
-        require_once(LAYOUTS_PATH . "/navigation-sprint-3.php");
+        require_once(LAYOUTS_PATH . "/navigation-sprint-5.php");
     ?>
     <main class="container" id="requirements">
         <div class="row">
             <div class="col-md-1 col-lg-2">
             </div>
-            <div class="col-12 col-md-10 col-lg-8 mb-3">
+            <div class="col-12 col-md-10 col-lg-8">
                 <h1 class="card col-12 py-3 mb-1 text-center">
                     Green River College
                     <br>
@@ -32,15 +32,23 @@
                 <div class="card my-2 notes">
                     <ul class="list-group list-group-flush text-center">
                         <li class="list-group-item text-break px-2">
-                            <strong>2660*All vaccination proof must include full name, date of birth, and date of vaccine, titer (blood draw), or test</strong>
+                            <strong>All vaccination proof must include full name, date of birth, and date of vaccine, titer (blood draw), or test</strong>
                         </li>
                     </ul>
                 </div>
-
+                <div class="card col-12 my-2 p-3 d-none" id="collapse-requirements-container">
+                    <button id="collapse-requirements" class="btn btn-success w-100 py-2 border">
+                        Collapse all Requirements
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-expand" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708z"/>
+                        </svg>
+                    </button>
+                </div>
                 <div class="accordion mb-2 my-2" id="requirements-accordion">
                     <?php
                         // setup and execute SELECT Query
-                        $allRequirements = executeQuery("SELECT * FROM ClinicalRequirements");
+                        $allRequirements = executeQuery("SELECT * 
+                                                         FROM ClinicalRequirements");
 
                         $targetCount = 0;
                         // run through rows returned from query
@@ -72,6 +80,13 @@
             </div>
         </div>
     </main>
+    <?php 
+        // display site footer
+        require_once(LAYOUTS_PATH . "/nursing-footer.php");
+    ?>
+
+    <!--Include script that sets up "Collapse All" requirements button-->
+    <script src="/js/collapse-accordion-items.js"></script>
 </body>
 </html>
 
@@ -110,7 +125,7 @@
      */
     function generateAccordionHeader($title, $targetID) {
         return "<h2 class='accordion-header'>
-                    <button class='accordion-button collapsed' type='button'
+                    <button class='accordion-button collapsed' type='button' id='collapse-{$targetID}'
                             data-bs-toggle='collapse' data-bs-target='#{$targetID}'
                             aria-expanded='false' aria-controls='{$targetID}'>
                         {$title}
@@ -130,13 +145,15 @@
         $accordionBody = "<div class='accordion-body p-0'>";
         
         // if a note was given
+        $notePresent = false;
         if(!empty($note)) {
             // generate and add it to the body at the top
             $accordionBody .= generateRequirementNotes($note);
+            $notePresent = true;
         }
 
         // generate and add all given options to body, then close off and return it
-        return $accordionBody . generateRequirementData($option1, $option2) . "</div>";
+        return $accordionBody . generateRequirementData($option1, $option2, $notePresent) . "</div>";
     }
 
     /** 
@@ -158,9 +175,13 @@
      * @param string $option2 The second requirement option (Optional: null)
      * @return string an HTML <div> containing the given option/s
      */
-    function generateRequirementData($option1, $option2 = "") {
+    function generateRequirementData($option1, $option2 = "", $notePresent) {
         // start off data content
-        $dataContent = "<div class='px-3 m-0 requirement-data'>";
+        $dataContent = "<div class='p-3 m-0 requirement-data'>";
+
+        if($notePresent) {
+            $dataContent = "<div class='p-3 pt-0 m-0 requirement-data'>";
+        }
 
         // generate and add the first option to display (required)
         $dataContent .= generateRequirementOption($option1);

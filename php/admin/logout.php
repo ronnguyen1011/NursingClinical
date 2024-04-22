@@ -7,5 +7,5 @@
     session_destroy();
 
     // redirect user to requirements page
-    header("location: /sprint-5/requirements.php");
+    header("location: /view/requirements.php");
 ?>

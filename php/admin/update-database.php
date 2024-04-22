@@ -74,7 +74,7 @@
                                     }
                                     
                                     // display success, and link to Clinical Requirements page
-                                    echo generateMessageWithLink("/sprint-5/requirements.php", "Clinical Requirements",
+                                    echo generateMessageWithLink("/view/requirements.php", "Clinical Requirements",
                                                                 "Changes were saved successfully");
                                 }
                                 else {
@@ -92,11 +92,11 @@
                         <div class="col-12 col-md-8">
                             <?php
                                 if( isset($_POST["old-name"]) && isset($_POST["new-name"]) ) {
-                                    // get the old and new clinical site names
+                                    // get the old and new view site names
                                     $oldSiteName = $_POST["old-name"];
                                     $newSiteName = $_POST["new-name"];
             
-                                    // get all submissions in DB corresponding to the old clinical site name
+                                    // get all submissions in DB corresponding to the old view site name
                                     $oldSiteSubmissionIDs = executeQuery("SELECT SubmissionID
                                                                         FROM ExperienceFormSubmissions
                                                                         WHERE SiteAttended = '{$oldSiteName}'");
@@ -106,7 +106,7 @@
                                         // get the current submissions ID
                                         $currSubmissionID = $currSubmission["SubmissionID"];
             
-                                        // update the current submission to belong to the new clinical site name
+                                        // update the current submission to belong to the new view site name
                                         $result = executeQuery("UPDATE ExperienceFormSubmissions 
                                                                 SET SiteAttended = '{$newSiteName}'
                                                                     , Seen = '0' 

@@ -40,8 +40,8 @@
                         && isset($recommendSite) ) {
                             // display questions and responses for questions 1 - 6 (required)
                             echo generateTextQuestionDisplay(1, "What Clinical Site did you attend?", $siteAttended, true); 
-                            echo generateStarQuestionDisplay(2, "I enjoyed my time at this clinical site", $enjoyedSite);
-                            echo generateStarQuestionDisplay(3, "The clinical staff was supportive of my role", $staffSupportive);
+                            echo generateStarQuestionDisplay(2, "I enjoyed my time at this view site", $enjoyedSite);
+                            echo generateStarQuestionDisplay(3, "The view staff was supportive of my role", $staffSupportive);
                             echo generateStarQuestionDisplay(4, "The site helped facilitate my learning objectives.", $siteLearningObjectives);
                             echo generateStarQuestionDisplay(5, "My preceptor helped facilitate my learning objectives.", $preceptorLearningObjectives);
                             echo generateStarQuestionDisplay(6, "I would recommend this site to another student.", $recommendSite);
@@ -55,7 +55,7 @@
 
                             if( !empty($instructorFeedback) ) {
                                 $questionText = "If you have any feedback you would like to leave about your 
-                                                 clinical instructor please add below. <strong>None of the instructors will see this</strong>.
+                                                 view instructor please add below. <strong>None of the instructors will see this</strong>.
                                                  We will just be using this to gage if an instructor needs to improve in areas,
                                                  or to highlight instructors who go above and beyond.";
 
@@ -86,7 +86,7 @@
 
                     // otherwise display error and link to experience survey
                     else {
-                        echo generateMessageWithLink("/sprint-5/experience.php", "Experience Survey",
+                        echo generateMessageWithLink("/view/experience.php", "Experience Survey",
                                                         "Please fill out the survey and try again",
                                                         "ERROR: No submission received from Experience Survey");
                     }

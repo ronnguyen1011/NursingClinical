@@ -1,6 +1,6 @@
 <?php 
     // get access to all PHP helpers
-    require_once("/home/geckosgr/public_html/initial.php");
+    require_once("/home/nguyenro/public_html/initial.php");
 
     // store the current page's title for dynamic HTML generation
     $currPageTitle = "Experience Survey";
@@ -60,7 +60,7 @@
                                 <input list="q1-site-attended" class="form-control" name="q1-site-attended" required>
                                 <datalist id="q1-site-attended">
                                     <?php
-                                        // get all unique clinical sites from DB
+                                        // get all unique view sites from DB
                                         $clinicalSites = executeQuery("SELECT DISTINCT SiteAttended 
                                                                        FROM ExperienceFormSubmissions
                                                                        ORDER BY SiteAttended");
