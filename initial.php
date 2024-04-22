@@ -8,14 +8,14 @@
 
     // define path constants
     define("PUBLIC_HTML_PATH", dirname(__FILE__));
-    define("PHP_PATH", PUBLIC_HTML_PATH . "/php");
+    define("PHP_PATH", PUBLIC_HTML_PATH . "/NursingClinical/php");
     define("LAYOUTS_PATH", PHP_PATH . "/layouts");
 
     // define cookie keys
     define("SUBMITTED_SURVEY_KEY", "submitted-survey");
 
     // provide DB credentials and connect/disconnect functions
-    require_once('/home/geckosgr/db-connect-nursing.php');
+    require_once('/home/nguyenro/db.php');
 
     // include all PHP helper functions
     require_once(PHP_PATH . "/helpers.php");
