@@ -1,24 +1,8 @@
-<?php 
-    // get access to all PHP helpers
-    require_once("/home/jbdavidg/public_html/initial.php");
-
+<?php
     // store the current page's title for dynamic HTML generation
     $currPageTitle = "Contact";
+    require "nav.php";
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php 
-        // include standard nursing header metadata
-        require_once(LAYOUTS_PATH . "/nursing-metadata.php");
-    ?>
-</head>
-<body>
-    <?php 
-        // display site navigation
-        require_once(LAYOUTS_PATH . "/navigation-sprint-5.php");
-    ?>
     <main class="container" id="contact">
         <div class="row">
             <div class="col-md-2 col-lg-3">

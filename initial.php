@@ -10,7 +10,6 @@
     define("PUBLIC_HTML_PATH", dirname(__FILE__));
     define("PHP_PATH", PUBLIC_HTML_PATH . "/NursingClinical/php");
     define("LAYOUTS_PATH", PHP_PATH . "/layouts");
-
     // define cookie keys
     define("SUBMITTED_SURVEY_KEY", "submitted-survey");
 
