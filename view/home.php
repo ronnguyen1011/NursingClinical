@@ -26,22 +26,28 @@ $currPageTitle = "Home";
             <div class="col-12 col-md-10 col-lg-8">
                 <!-- Welcome Message -->
                 <h1 class="card col-12 py-3 mb-1 text-center">
-                    Welcome to the Green River Nursing Program
+                    Welcome to the Green River College Nursing Program Portal
                 </h1>
                 <!-- Carousel slideshow -->
                 <div id="carouselExample" class="carousel slide card col-12 my-2 text-center">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" ></button>
+                        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" ></button>
+                        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2" ></button>
+                        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="3" ></button>
+                    </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="https://www.greenriver.edu/media/content-assets/images/students/academics/degrees-amp-programs/nursing/GR1_0080-JUN2017.jpg" class="d-block w-100" alt="...">
+                            <img src="/NursingClinical/nursing-images/slideshowpic1.jpeg" class="d-block w-100" alt="GRC Nursing">
                         </div>
                         <div class="carousel-item">
-                            <img src="https://www.greenriver.edu/media/content-assets/images/students/academics/degrees-amp-programs/nursing/GR1_0121-JUN2017.jpg" class="d-block w-100" alt="...">
+                            <img src="/NursingClinical/nursing-images/slideshowpic2.jpeg" class="d-block w-100" alt="GRC Nursing">
                         </div>
                         <div class="carousel-item">
-                            <img src="https://www.greenriver.edu/media/content-assets/images/students/academics/degrees-amp-programs/nursing/GR1_0172-JUN2017.jpg" class="d-block w-100" alt="...">
+                            <img src="/NursingClinical/nursing-images/slideshowpic3.jpeg" class="d-block w-100" alt="GRC Nursing">
                         </div>
                         <div class="carousel-item">
-                            <img src="https://www.greenriver.edu/media/content-assets/images/students/academics/degrees-amp-programs/nursing/GR1_0207-JUN2017.jpg" class="d-block w-100" alt="...">
+                            <img src="/NursingClinical/nursing-images/slideshowpic4.jpeg" class="d-block w-100" alt="GRC Nursing">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -56,8 +62,9 @@ $currPageTitle = "Home";
 
                 <!-- Card with content -->
                 <div class="card col-12 my-2">
-                    <div class="card-body">
-                        <p class="card-text">Here to provide a wide variety of health career training opportunities to improve patient care through training for individuals to advance in their nursing profession journey.</p>
+                    <div class="card-body text-center">
+                        <p class="card-text">Here to provide a wide variety of health career training opportunities to
+                            improve patient care through training for individuals to advance in their nursing profession journey.</p>
                     </div>
                 </div>
                 <!-- End of Card with content -->
