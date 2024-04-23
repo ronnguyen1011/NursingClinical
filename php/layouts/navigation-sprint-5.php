@@ -15,9 +15,9 @@
      * and their corresponding links
      */
     $adminNavigationPages = array( 
-        "View Entries" => "/php/admin/view-entries.php",
-        "Edit Requirements" => "/php/admin/edit-requirements.php",
-        "Log Out" => "/php/admin/logout.php"
+        "View Entries" => "/NursingClinical/php/admin/view-entries.php",
+        "Edit Requirements" => "/NursingClinical/php/admin/edit-requirements.php",
+        "Log Out" => "/NursingClinical/php/admin/logout.php"
     );
 ?>
 

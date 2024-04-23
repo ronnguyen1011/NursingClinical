@@ -15,7 +15,7 @@
     define("SUBMITTED_SURVEY_KEY", "submitted-survey");
 
     // provide DB credentials and connect/disconnect functions
-    require_once('/home/nguyenro/db.php');
+    require_once('/home/jbdavidg/db-connect-nursing.php');
 
     // include all PHP helper functions
     require_once(PHP_PATH . "/helpers.php");

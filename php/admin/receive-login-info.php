@@ -1,6 +1,6 @@
 <?php
     // get access to all PHP helpers
-    require_once("/home/geckosgr/public_html/initial.php");
+    require_once("/home/jbdavidg/public_html/initial.php");
 
     // store the current page's title for dynamic HTML generation
     $currPageTitle = "Verify Credentials";
@@ -39,7 +39,7 @@
                             $_SESSION["Admin"] = true;
 
                             // display success and link to requirements page
-                            echo generateMessageWithLink("/view/requirements.php", "Continue",
+                            echo generateMessageWithLink("/NursingClinical/view/home.php", "Continue",
                                                         "Logged In successfully");
 
                         }
