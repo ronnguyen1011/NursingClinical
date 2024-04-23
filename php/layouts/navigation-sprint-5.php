@@ -4,6 +4,7 @@
      * and their corresponding links
      */
     $publicNavigationPages = array(
+        "Home" => "/NursingClinical/view/home.php",
         "Clinical Requirements" => "/NursingClinical/view/requirements.php",
         "Experience Survey" => "/NursingClinical/view/experience.php",
         "Contact" => "/NursingClinical/view/contact.php"
@@ -24,7 +25,9 @@
     <nav class="navbar sticky-top navbar-expand-md border-bottom">
         <div class="container">
             <div class="navbar-brand">
-                <img src="/NursingClinical/nursing-images/nursing-logo.png" height="60" alt="GRC Nursing Program founded 1965">
+                <a href="/NursingClinical/view/home.php">
+                    <img src="/NursingClinical/nursing-images/nursing-logo.png" height="60" alt="GRC Nursing Program founded 1965">
+                </a>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-nav"
                     aria-controls="navbar-nav" aria-expanded="false" aria-label="Toggle navigation">
