@@ -1,0 +1,78 @@
+<?php
+// get access to all PHP helpers
+require_once("/home/jbdavidg/public_html/initial.php");
+
+// store the current page's title for dynamic HTML generation
+$currPageTitle = "Home";
+?>
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <?php
+        // include standard nursing header metadata
+        require_once(LAYOUTS_PATH . "/nursing-metadata.php");
+        ?>
+    </head>
+    <body>
+    <?php
+    // display site navigation
+    require_once(LAYOUTS_PATH . "/navigation-sprint-5.php");
+    ?>
+    <main class="container" id="requirements">
+        <div class="row">
+            <div class="col-md-1 col-lg-2">
+            </div>
+            <div class="col-12 col-md-10 col-lg-8">
+                <!-- Welcome Message -->
+                <h1 class="card col-12 py-3 mb-1 text-center">
+                    Welcome to the Green River Nursing Program
+                </h1>
+                <!-- Carousel slideshow -->
+                <div id="carouselExample" class="carousel slide card col-12 my-2 text-center">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://www.greenriver.edu/media/content-assets/images/students/academics/degrees-amp-programs/nursing/GR1_0080-JUN2017.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://www.greenriver.edu/media/content-assets/images/students/academics/degrees-amp-programs/nursing/GR1_0121-JUN2017.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://www.greenriver.edu/media/content-assets/images/students/academics/degrees-amp-programs/nursing/GR1_0172-JUN2017.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://www.greenriver.edu/media/content-assets/images/students/academics/degrees-amp-programs/nursing/GR1_0207-JUN2017.jpg" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+                <!-- Card with content -->
+                <div class="card col-12 my-2">
+                    <div class="card-body">
+                        <p class="card-text">Here to provide a wide variety of health career training opportunities to improve patient care through training for individuals to advance in their nursing profession journey.</p>
+                    </div>
+                </div>
+                <!-- End of Card with content -->
+
+            </div>
+            <div class="col-md-1 col-lg-2">
+            </div>
+        </div>
+    </main>
+    <?php
+    // display site footer
+    require_once(LAYOUTS_PATH . "/nursing-footer.php");
+    ?>
+
+    <!--Include script that sets up "Collapse All" requirements button-->
+    <script src="/js/collapse-accordion-items.js"></script>
+    </body>
+    </html>
