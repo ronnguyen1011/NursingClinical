@@ -11,7 +11,7 @@
                 <h1 class="card col-12 py-3 mb-1 text-center">
                     Contact
                 </h1>
-                <form action="/php/send-email.php" method="post" id="contact-form">
+                <form action="/NursingClinical/php/send-email.php" method="post" id="contact-form">
                     <div class="card p-3 my-1">
                         <div class="contact form-floating">
                             <input type="text" class="form-control" id="name" name="name"
