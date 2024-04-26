@@ -7,6 +7,7 @@
         "Home" => "/NursingClinical/view/home.php",
         "Clinical Requirements" => "/NursingClinical/view/requirements.php",
         "Experience Survey" => "/NursingClinical/view/experience.php",
+        "Tutorials" => "/NursingClinical/view/tutorials.php",
         "Contact" => "/NursingClinical/view/contact.php"
     );
 
