@@ -1,6 +1,6 @@
 <?php 
     // get access to all PHP helpers
-    require_once("/home/geckosgr/public_html/initial.php");
+    require_once("/home/geckosgr/public_html/initial.Controller");
 
     // store the current page's title for dynamic HTML generation
     $currPageTitle = "Confirm Submission";
@@ -21,7 +21,7 @@
 <head>
     <?php 
         // include standard nursing header metadata
-        require_once(LAYOUTS_PATH . "/nursing-metadata.php");
+        require_once(LAYOUTS_PATH . "/nursing-metadata.Controller");
     ?>
 </head>
 <body>
@@ -86,7 +86,7 @@
 
                     // otherwise display error and link to experience survey
                     else {
-                        echo generateMessageWithLink("/view/experience.php", "Experience Survey",
+                        echo generateMessageWithLink("/view/experience.Controller", "Experience Survey",
                                                         "Please fill out the survey and try again",
                                                         "ERROR: No submission received from Experience Survey");
                     }

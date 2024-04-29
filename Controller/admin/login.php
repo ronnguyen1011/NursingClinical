@@ -1,6 +1,6 @@
 <?php
     // get access to all PHP helpers
-    require_once("/home/jbdavidg/public_html/initial.php");
+    require_once("/home/jbdavidg/public_html/initial.Controller");
 
     // store the current page's title for dynamic HTML generation
     $currPageTitle = "Login";
@@ -11,7 +11,7 @@
 <head>
     <?php
         // include standard nursing header metadata
-        require_once(LAYOUTS_PATH . "/nursing-metadata.php");
+        require_once(LAYOUTS_PATH . "/nursing-metadata.Controller");
     ?>
 </head>
 <body>

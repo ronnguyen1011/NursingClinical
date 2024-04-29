@@ -1,6 +1,6 @@
 <?php
     // get access to all PHP helpers
-    require_once("/home/geckosgr/public_html/initial.php");
+    require_once("/home/geckosgr/public_html/initial.Controller");
 
     // store the current page's title for dynamic HTML generation
     $currPageTitle = "Submission Receipt";
@@ -57,14 +57,14 @@
 <head>
     <?php 
         // include standard nursing header metadata
-        require_once(LAYOUTS_PATH . "/nursing-metadata.php");
+        require_once(LAYOUTS_PATH . "/nursing-metadata.Controller");
     ?>
 </head>
 <body>
     <main class="container">
         <div class="row">
         <?php
-            // check that user came here from confirm.php
+            // check that user came here from confirm.Controller
             if( isset($_POST["survey-submitted"]) && $_POST["survey-submitted"] == "confirmed" ) {
 
         ?>
@@ -103,7 +103,7 @@
                 </div>
                 <div class="col-12 col-md-8 col-lg-6">
                     <?php
-                        echo generateMessageWithLink("/view/experience.php", "Experience Survey",
+                        echo generateMessageWithLink("/view/experience.Controller", "Experience Survey",
                                                      "Please fill out the survey and try again",
                                                      "ERROR: No submission received from Experience Survey");
                     ?>

@@ -1,6 +1,6 @@
 <?php 
     // get access to all PHP helpers
-    require_once("/home/jbdavidg/public_html/initial.php");
+    require_once("/home/jbdavidg/public_html/initial.Controller");
 
     // store the current page's title for dynamic HTML generation
     $currPageTitle = "Save Requirements";
@@ -21,7 +21,7 @@
 <head>
     <?php 
         // include standard nursing header metadata
-        require_once(LAYOUTS_PATH . "/nursing-metadata.php");
+        require_once(LAYOUTS_PATH . "/nursing-metadata.Controller");
     ?>
 </head>
 <body>
@@ -34,7 +34,7 @@
                     if($_GET["operation"] === "edit-requirements") { ?>
                         <div class="col-12 col-md-8">
                             <?php
-                                // if page was accessed from edit-requirements.php
+                                // if page was accessed from edit-requirements.Controller
                                 if(isset($_POST["confirm-edits"]) && $_POST["confirm-edits"] === "confirmed") {
                                     // loop through the data stored in _$POST
                                     foreach ($_POST as $postKey => $postValue) {
@@ -74,11 +74,11 @@
                                     }
                                     
                                     // display success, and link to Clinical Requirements page
-                                    echo generateMessageWithLink("/view/requirements.php", "Clinical Requirements",
+                                    echo generateMessageWithLink("/view/requirements.Controller", "Clinical Requirements",
                                                                 "Changes were saved successfully");
                                 }
                                 else {
-                                    echo generateMessageWithLink("/php/admin/edit-requirements.php", "Edit Clinical Requirements",
+                                    echo generateMessageWithLink("/Controller/admin/edit-requirements.Controller", "Edit Clinical Requirements",
                                                                 "Please edit Clinical Requirements there and try again",
                                                                 "ERROR: No changes received from Edit Requirements");
                                 }
@@ -119,7 +119,7 @@
                                     }
                                     
                                     // display success, and link to View Entries page
-                                    echo generateMessageWithLink("view-entries.php", "View Entries",
+                                    echo generateMessageWithLink("view-entries.Controller", "View Entries",
                                                                 "Name updated successfully");
                                 }
             
@@ -146,7 +146,7 @@
                                 }
                                 
                                 // display success, and link to View Entries page
-                                echo generateMessageWithLink("edit-requirements.php", "Edit Requirements",
+                                echo generateMessageWithLink("edit-requirements.Controller", "Edit Requirements",
                                                             "Requirement added successfully");
                             ?>
                         </div>
@@ -156,7 +156,7 @@
 
                 else {
 					echo "<div class='col-12 col-md-8'>" 
-							. displayAccessDenied("login.php", "Login") .
+							. displayAccessDenied("login.Controller", "Login") .
 						"</div>";
 				}
             ?>

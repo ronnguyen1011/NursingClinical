@@ -8,7 +8,7 @@
 
     // define path constants
     define("PUBLIC_HTML_PATH", dirname(__FILE__));
-    define("PHP_PATH", PUBLIC_HTML_PATH . "/NursingClinical/php");
+    define("PHP_PATH", PUBLIC_HTML_PATH . "/NursingClinical/Controller");
     define("LAYOUTS_PATH", PHP_PATH . "/layouts");
 
     // define cookie keys
@@ -16,8 +16,8 @@
 
     // provide DB credentials and connect/disconnect functions
     $_SERVER['DOCUMENT_ROOT'] = str_replace('/public_html', '', $_SERVER['DOCUMENT_ROOT']);
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/db-connect-nursing.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/db-connect-nursing.Controller');
 
     // include all PHP helper functions
-    require_once(PHP_PATH . "/helpers.php");
+    require_once(PHP_PATH . "/helpers.Controller");
 ?>

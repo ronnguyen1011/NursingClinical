@@ -1,6 +1,6 @@
 <?php 
     // get access to all PHP helpers
-    require_once("/home/jbdavidg/public_html/initial.php");
+    require_once("/home/jbdavidg/public_html/initial.Controller");
 
     // store the current page's title for dynamic HTML generation
     $currPageTitle = "Edit Requirements";
@@ -47,7 +47,7 @@
 <head>
     <?php 
         // include standard nursing header metadata
-        require_once(LAYOUTS_PATH . "/nursing-metadata.php");
+        require_once(LAYOUTS_PATH . "/nursing-metadata.Controller");
     ?>
 </head>
 <body data-bs-spy='scroll' data-bs-target='#scrollspy' data-bs-smooth-scroll='true'>
@@ -66,7 +66,7 @@
                     </div>
                     <?php 
                         // generate scrollspy to track and link requirements
-                        echo generateBootstrapScrollspy($allRequirementTitles, "/view/requirements.php");
+                        echo generateBootstrapScrollspy($allRequirementTitles, "/view/requirements.Controller");
                     ?>
                 </div>
                 <div class="col-12 col-md-9 col-lg-9">
@@ -97,7 +97,7 @@
 					echo "<div class='col-md-3 col-lg-3'>
 						</div>
 						<div class='col-12 col-md-6 col-lg-6'>" 
-							. displayAccessDenied("login.php", "Login") .
+							. displayAccessDenied("login.Controller", "Login") .
 						"</div>
 						<div class='col-md-3 col-lg-3'>
 						</div>";
@@ -113,7 +113,7 @@
 
 <?php
     function generateAddRequirementModal() {
-        $addRequirementForm = "<form action='/php/admin/update-database.php?operation=add-requirement' method='post'>
+        $addRequirementForm = "<form action='/Controller/admin/update-database.Controller?operation=add-requirement' method='post'>
                                     " . generateBootstrapFloatingTextBox("RequirementTitle", "Title", true) . "
                                     " . generateBootstrapFloatingTextBox("RequirementNotes", "Notes", false) . "
                                     " . generateBootstrapFloatingTextArea("Option1", "Option 1", true) . "

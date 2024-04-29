@@ -1,6 +1,6 @@
 <?php
     // get access to all PHP helpers
-    require_once("/home/jbdavidg/public_html/initial.php");
+    require_once("/home/jbdavidg/public_html/initial.Controller");
 
     // store the current page's title for dynamic HTML generation
     $currPageTitle = "Verify Credentials";
@@ -11,7 +11,7 @@
 <head>
     <?php
         // include standard nursing header metadata
-        require_once(LAYOUTS_PATH . "/nursing-metadata.php");
+        require_once(LAYOUTS_PATH . "/nursing-metadata.Controller");
     ?>
 </head>
 <body>
@@ -39,14 +39,14 @@
                             $_SESSION["Admin"] = true;
 
                             // display success and link to requirements page
-                            echo generateMessageWithLink("/NursingClinical/view/home.php", "Continue",
+                            echo generateMessageWithLink("/NursingClinical/view/home.Controller", "Continue",
                                                         "Logged In successfully");
 
                         }
 
                         else {
                             // display error and link to login page
-                            echo generateMessageWithLink("login.php", "Login",
+                            echo generateMessageWithLink("login.Controller", "Login",
                                                         "Please try again", "Login Failed");
 
                             // cease the session
@@ -56,7 +56,7 @@
                     }
 
                     else {
-                        echo displayAccessDenied("login.php", "Login");
+                        echo displayAccessDenied("login.Controller", "Login");
                     }
                 ?>
             </div>

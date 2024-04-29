@@ -1,7 +1,6 @@
 <?php
     // get access to all PHP helpers
     require_once($_SERVER['DOCUMENT_ROOT'] . "/initial.php");
-
 ?>
 
 <!DOCTYPE html>

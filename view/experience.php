@@ -240,7 +240,7 @@
     </main>
     <?php 
         // display site footer
-        require_once(LAYOUTS_PATH . "/nursing-footer.php");
+        require_once(LAYOUTS_PATH . "/nursing-footer.Controller");
     ?>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 // get access to all PHP helpers
-require_once("/home/jbdavidg/public_html/initial.php");
+require_once("/home/jbdavidg/public_html/initial.Controller");
 
 // store the current page's title for dynamic HTML generation
 $currPageTitle = "Send Email";
@@ -11,7 +11,7 @@ $currPageTitle = "Send Email";
     <head>
         <?php
         // include standard nursing header metadata
-        require_once(LAYOUTS_PATH . "/nursing-metadata.php");
+        require_once(LAYOUTS_PATH . "/nursing-metadata.Controller");
         ?>
     </head>
     <body>
@@ -59,7 +59,7 @@ $currPageTitle = "Send Email";
 
                     // otherwise display error and link to contact form
                     else {
-                        echo generateMessageWithLink("/NursingClinical/view/contact.php", "Contact Form",
+                        echo generateMessageWithLink("/NursingClinical/view/contact.Controller", "Contact Form",
                             "Please fill out the form and try again",
                             "ERROR: No submission received from Contact Form");
                     }

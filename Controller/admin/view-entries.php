@@ -1,6 +1,6 @@
 <?php
     // get access to all PHP helpers
-    require_once("/home/jbdavidg/public_html/initial.php");
+    require_once("/home/jbdavidg/public_html/initial.Controller");
 
     // store the current page's title for dynamic HTML generation
     $currPageTitle = "View Entries";
@@ -126,7 +126,7 @@
 <head>
 	<?php 
         // include standard nursing header metadata
-        require_once(LAYOUTS_PATH . "/nursing-metadata.php");
+        require_once(LAYOUTS_PATH . "/nursing-metadata.Controller");
     ?>
 </head>
 <body data-bs-spy='scroll' data-bs-target='#scrollspy' data-bs-smooth-scroll='true'>
@@ -156,7 +156,7 @@
 						// generate scrollspy to track and link view sites, including the
 						// export button above the links
 						echo generateBootstrapScrollspy($allClinicalSiteNames
-														, "/view/experience.php"
+														, "/view/experience.Controller"
 														, $exportButton);
 					?>
 				</div>
@@ -181,7 +181,7 @@
 					echo "<div class='col-md-3 col-lg-3'>
 						</div>
 						<div class='col-12 col-md-6 col-lg-6'>" 
-							. displayAccessDenied("login.php", "Login") .
+							. displayAccessDenied("login.Controller", "Login") .
 						"</div>
 						<div class='col-md-3 col-lg-3'>
 						</div>";
@@ -394,7 +394,7 @@
 							</svg>
 						</button>";
 
-        $editForm = "<form action='/php/admin/update-database.php?operation=edit-site-name' method='post'>
+        $editForm = "<form action='/Controller/admin/update-database.Controller?operation=edit-site-name' method='post'>
 						<input type='hidden' name='old-name' value='{$clinicalSiteName}'>
 						<div class='input-group'>
 							<input type='text' name='new-name' class='form-control' 

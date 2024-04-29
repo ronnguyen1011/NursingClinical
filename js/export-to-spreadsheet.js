@@ -22,7 +22,7 @@ const CSV_FILE_NAME = "experience-survey-submissions";
 const processedSubmissionRows = []; 
 
 /**
- * Takes the submission data on view-entries.php, places it within a .csv file,
+ * Takes the submission data on view-entries.Controller, places it within a .csv file,
  * and ties the generated file to the download attribute of button with the given ID
  * 
  * @param {string} exportButtonID The ID of the button used to download the generated .csv file
