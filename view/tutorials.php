@@ -66,7 +66,7 @@ require "nav.php";
     </main>
     <?php
     // display site footer
-    require_once(LAYOUTS_PATH . "/nursing-footer.Controller");
+    require_once(LAYOUTS_PATH . "/nursing-footer.php");
     ?>
 
     <!--Include script that sets up "Collapse All" tutorials button-->

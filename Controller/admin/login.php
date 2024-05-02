@@ -1,19 +1,8 @@
 <?php
-    // get access to all PHP helpers
-    require_once("/home/jbdavidg/public_html/initial.Controller");
-
-    // store the current page's title for dynamic HTML generation
     $currPageTitle = "Login";
+//    require "nav.php";
+    echo $_SERVER['DOCUMENT_ROOT'];
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php
-        // include standard nursing header metadata
-        require_once(LAYOUTS_PATH . "/nursing-metadata.Controller");
-    ?>
-</head>
 <body>
     <main class="container mt-3">
         <div class='row'> 
