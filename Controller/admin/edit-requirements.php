@@ -1,6 +1,6 @@
 <?php 
     // get access to all PHP helpers
-    require_once("/home/jbdavidg/public_html/initial.Controller");
+    require_once($_SERVER['DOCUMENT_ROOT'] . "/initial.php");
 
     // store the current page's title for dynamic HTML generation
     $currPageTitle = "Edit Requirements";
