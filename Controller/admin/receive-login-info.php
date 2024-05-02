@@ -39,14 +39,14 @@
                             $_SESSION["Admin"] = true;
 
                             // display success and link to requirements page
-                            echo generateMessageWithLink("/NursingClinical/view/home.Controller", "Continue",
+                            echo generateMessageWithLink("/NursingClinical/view/home.php", "Continue",
                                                         "Logged In successfully");
 
                         }
 
                         else {
                             // display error and link to login page
-                            echo generateMessageWithLink("login.Controller", "Login",
+                            echo generateMessageWithLink("login.php", "Login",
                                                         "Please try again", "Login Failed");
 
                             // cease the session
@@ -56,7 +56,7 @@
                     }
 
                     else {
-                        echo displayAccessDenied("login.Controller", "Login");
+                        echo displayAccessDenied("login.php", "Login");
                     }
                 ?>
             </div>

@@ -7,5 +7,5 @@
     session_destroy();
 
     // redirect user to requirements page
-    header("location: /NursingClinical/view/requirements.Controller");
+    header("location: /NursingClinical/view/requirements.php");
 ?>
