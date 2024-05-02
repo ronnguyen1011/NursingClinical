@@ -4,11 +4,11 @@
      * and their corresponding links
      */
     $publicNavigationPages = array(
-        "Home" => "/NursingClinical/view/home.Controller",
-        "Clinical Requirements" => "/NursingClinical/view/requirements.Controller",
-        "Experience Survey" => "/NursingClinical/view/experience.Controller",
-        "Tutorials" => "/NursingClinical/view/tutorials.Controller",
-        "Contact" => "/NursingClinical/view/contact.Controller"
+        "Home" => "/NursingClinical/view/home.php",
+        "Clinical Requirements" => "/NursingClinical/view/requirements.php",
+        "Experience Survey" => "/NursingClinical/view/experience.php",
+        "Tutorials" => "/NursingClinical/view/tutorials.php",
+        "Contact" => "/NursingClinical/view/contact.php"
     );
 
     /**
@@ -16,9 +16,9 @@
      * and their corresponding links
      */
     $adminNavigationPages = array( 
-        "View Entries" => "/NursingClinical/Controller/admin/view-entries.Controller",
-        "Edit Requirements" => "/NursingClinical/Controller/admin/edit-requirements.Controller",
-        "Log Out" => "/NursingClinical/Controller/admin/logout.Controller"
+        "View Entries" => "/NursingClinical/Controller/admin/view-entries.php",
+        "Edit Requirements" => "/NursingClinical/Controller/admin/edit-requirements.php",
+        "Log Out" => "/NursingClinical/Controller/admin/logout.php"
     );
 ?>
 

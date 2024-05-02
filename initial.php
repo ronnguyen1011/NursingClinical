@@ -16,8 +16,8 @@
 
     // provide DB credentials and connect/disconnect functions
     $_SERVER['DOCUMENT_ROOT'] = str_replace('/public_html', '', $_SERVER['DOCUMENT_ROOT']);
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/db-connect-nursing.Controller');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/db-connect-nursing.php');
 
     // include all PHP helper functions
-    require_once(PHP_PATH . "/helpers.Controller");
+    require_once(PHP_PATH . "/helpers.php");
 ?>

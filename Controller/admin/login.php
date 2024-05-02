@@ -1,8 +1,19 @@
 <?php
+    // get access to all PHP helpers
+    require_once($_SERVER['DOCUMENT_ROOT'] . "/initial.php");
+
+    // store the current page's title for dynamic HTML generation
     $currPageTitle = "Login";
-//    require "nav.php";
-    echo $_SERVER['DOCUMENT_ROOT'];
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <?php
+        // include standard nursing header metadata
+        require_once(LAYOUTS_PATH . "/nursing-metadata.php");
+    ?>
+</head>
 <body>
     <main class="container mt-3">
         <div class='row'> 
