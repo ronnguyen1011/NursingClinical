@@ -3,6 +3,13 @@
 $currPageTitle = "Home";
 require "nav.php";
 ?>
+<?php
+//$folder = $_SERVER['DOCUMENT_ROOT'].'/NursingClinical/nursing-images/slideshow';
+//echo $folder;
+//$files = scandir($folder);
+//$imageFilenames = array_diff($files, array('..', '.')); // Exclude . and .. from the list
+?>
+
 <body>
     <main class="container" id="requirements">
         <div class="row">
@@ -16,24 +23,27 @@ require "nav.php";
                 <!-- Carousel slideshow -->
                 <div id="carouselExample" class="carousel slide card col-12 my-2 text-center">
                     <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" ></button>
-                        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" ></button>
-                        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2" ></button>
-                        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="3" ></button>
+                        <?php
+                        $folder = $_SERVER['DOCUMENT_ROOT'].'/public_html/NursingClinical/nursing-images/slideshow/';
+                        $file_list = glob($folder . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
+                        $total_files = count($file_list);
+
+                        for ($i = 0; $i < $total_files; $i++) {
+                            $active_class = ($i == 0) ? 'active' : '';
+                            echo '<button type="button" data-bs-target="#carouselExample" data-bs-slide-to="' . $i . '" class="' . $active_class . '"></button>';
+                        }
+                        ?>
                     </div>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="/NursingClinical/nursing-images/slideshowpic1.jpeg" class="d-block w-100" alt="GRC Nursing">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="/NursingClinical/nursing-images/slideshowpic2.jpeg" class="d-block w-100" alt="GRC Nursing">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="/NursingClinical/nursing-images/slideshowpic3.jpeg" class="d-block w-100" alt="GRC Nursing">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="/NursingClinical/nursing-images/slideshowpic4.jpeg" class="d-block w-100" alt="GRC Nursing">
-                        </div>
+                        <?php
+                        foreach ($file_list as $index => $file) {
+                            $trimmed_file = str_replace($_SERVER['DOCUMENT_ROOT'].'/public_html', '', $file);
+                            $active_class = ($index == 0) ? 'active' : '';
+                            echo '<div class="carousel-item ' . $active_class . '">';
+                            echo '<img src="' . $trimmed_file . '" class="d-block w-100" alt="Slide ' . ($index + 1) . '">';
+                            echo '</div>';
+                        }
+                        ?>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -44,6 +54,16 @@ require "nav.php";
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
+
+                <?php
+                if ($_SESSION["Admin"] == 1){
+                    echo '<form action="upload.php" method="post" enctype="multipart/form-data">
+                            <input type="file" name="fileToUpload" id="fileToUpload">
+                            <input type="submit" value="Upload File" name="submit">
+                            </form>';
+                }
+                ?>
+
 
                 <!-- Card with content -->
                 <div class="card col-12 my-2">
