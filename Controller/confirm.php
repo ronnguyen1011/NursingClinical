@@ -86,7 +86,7 @@
 
                     // otherwise display error and link to experience survey
                     else {
-                        echo generateMessageWithLink("/view/experience.php", "Experience Survey",
+                        echo generateMessageWithLink("/NursingClinical/view/experience.php", "Experience Survey",
                                                         "Please fill out the survey and try again",
                                                         "ERROR: No submission received from Experience Survey");
                     }
