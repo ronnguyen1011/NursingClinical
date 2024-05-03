@@ -57,7 +57,7 @@
 <head>
     <?php 
         // include standard nursing header metadata
-        require_once(LAYOUTS_PATH . "/nursing-metadata.Controller");
+        require_once(LAYOUTS_PATH . "/nursing-metadata.php");
     ?>
 </head>
 <body>
@@ -103,7 +103,7 @@
                 </div>
                 <div class="col-12 col-md-8 col-lg-6">
                     <?php
-                        echo generateMessageWithLink("/view/experience.Controller", "Experience Survey",
+                        echo generateMessageWithLink("/view/experience.php", "Experience Survey",
                                                      "Please fill out the survey and try again",
                                                      "ERROR: No submission received from Experience Survey");
                     ?>

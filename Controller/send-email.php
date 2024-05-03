@@ -59,7 +59,7 @@ $currPageTitle = "Send Email";
 
                     // otherwise display error and link to contact form
                     else {
-                        echo generateMessageWithLink("/NursingClinical/view/contact.Controller", "Contact Form",
+                        echo generateMessageWithLink("/NursingClinical/view/contact.php", "Contact Form",
                             "Please fill out the form and try again",
                             "ERROR: No submission received from Contact Form");
                     }

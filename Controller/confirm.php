@@ -21,7 +21,7 @@
 <head>
     <?php 
         // include standard nursing header metadata
-        require_once(LAYOUTS_PATH . "/nursing-metadata.Controller");
+        require_once(LAYOUTS_PATH . "/nursing-metadata.php");
     ?>
 </head>
 <body>
@@ -62,7 +62,7 @@
                                 echo generateTextQuestionDisplay(8, $questionText, $instructorFeedback, false);
                             }
                 ?>
-                            <form class="my-1" action="/php/receipt.php" method="post">
+                            <form class="my-1" action="/NursingClinical/Controller/receipt.php" method="post">
                                 <input type="hidden" name="survey-submitted" value="confirmed">
 
                                 <input type="hidden" name="q1-site-attended" value="<?php echo $siteAttended; ?>">
@@ -86,7 +86,7 @@
 
                     // otherwise display error and link to experience survey
                     else {
-                        echo generateMessageWithLink("/view/experience.Controller", "Experience Survey",
+                        echo generateMessageWithLink("/view/experience.php", "Experience Survey",
                                                         "Please fill out the survey and try again",
                                                         "ERROR: No submission received from Experience Survey");
                     }
