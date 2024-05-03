@@ -11,7 +11,7 @@ $currPageTitle = "Send Email";
     <head>
         <?php
         // include standard nursing header metadata
-        require_once(LAYOUTS_PATH . "/nursing-metadata.Controller");
+        require_once(LAYOUTS_PATH . "/nursing-metadata.php");
         ?>
     </head>
     <body>
