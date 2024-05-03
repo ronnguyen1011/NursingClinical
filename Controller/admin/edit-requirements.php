@@ -66,14 +66,14 @@
                     </div>
                     <?php 
                         // generate scrollspy to track and link requirements
-                        echo generateBootstrapScrollspy($allRequirementTitles, "/view/requirements.Controller");
+                        echo generateBootstrapScrollspy($allRequirementTitles, "/NursingClinical/view/home.php");
                     ?>
                 </div>
                 <div class="col-12 col-md-9 col-lg-9">
                     <div class="row justify-content-center">
                         <?php echo generateAddRequirementModal(); ?>
                     </div>
-                    <form class="container" action="/php/admin/update-database.php?operation=edit-requirements" method="post">
+                    <form class="container" action="/NursingClinical/Controller/admin/update-database.php?operation=edit-requirements" method="post">
                         <input type="hidden" value="confirmed" name="confirm-edits">
                         <div class="row justify-content-center">
                             <?php
@@ -97,7 +97,7 @@
 					echo "<div class='col-md-3 col-lg-3'>
 						</div>
 						<div class='col-12 col-md-6 col-lg-6'>" 
-							. displayAccessDenied("login.Controller", "Login") .
+							. displayAccessDenied("login.php", "Login") .
 						"</div>
 						<div class='col-md-3 col-lg-3'>
 						</div>";
@@ -113,7 +113,7 @@
 
 <?php
     function generateAddRequirementModal() {
-        $addRequirementForm = "<form action='/Controller/admin/update-database.Controller?operation=add-requirement' method='post'>
+        $addRequirementForm = "<form action='/NursingClinical/Controller/admin/update-database.php?operation=add-requirement' method='post'>
                                     " . generateBootstrapFloatingTextBox("RequirementTitle", "Title", true) . "
                                     " . generateBootstrapFloatingTextBox("RequirementNotes", "Notes", false) . "
                                     " . generateBootstrapFloatingTextArea("Option1", "Option 1", true) . "

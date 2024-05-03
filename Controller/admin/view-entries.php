@@ -156,7 +156,7 @@
 						// generate scrollspy to track and link view sites, including the
 						// export button above the links
 						echo generateBootstrapScrollspy($allClinicalSiteNames
-														, "/view/experience.Controller"
+														, "/NursingClinical/view/home.php"
 														, $exportButton);
 					?>
 				</div>
@@ -181,7 +181,7 @@
 					echo "<div class='col-md-3 col-lg-3'>
 						</div>
 						<div class='col-12 col-md-6 col-lg-6'>" 
-							. displayAccessDenied("login.Controller", "Login") .
+							. displayAccessDenied("login.php", "Login") .
 						"</div>
 						<div class='col-md-3 col-lg-3'>
 						</div>";
@@ -394,7 +394,7 @@
 							</svg>
 						</button>";
 
-        $editForm = "<form action='/Controller/admin/update-database.Controller?operation=edit-site-name' method='post'>
+        $editForm = "<form action='/Controller/admin/update-database.php?operation=edit-site-name' method='post'>
 						<input type='hidden' name='old-name' value='{$clinicalSiteName}'>
 						<div class='input-group'>
 							<input type='text' name='new-name' class='form-control' 

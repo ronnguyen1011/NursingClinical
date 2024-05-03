@@ -34,7 +34,7 @@
                     if($_GET["operation"] === "edit-requirements") { ?>
                         <div class="col-12 col-md-8">
                             <?php
-                                // if page was accessed from edit-requirements.Controller
+                                // if page was accessed from edit-requirements.php
                                 if(isset($_POST["confirm-edits"]) && $_POST["confirm-edits"] === "confirmed") {
                                     // loop through the data stored in _$POST
                                     foreach ($_POST as $postKey => $postValue) {
@@ -74,11 +74,11 @@
                                     }
                                     
                                     // display success, and link to Clinical Requirements page
-                                    echo generateMessageWithLink("/view/requirements.Controller", "Clinical Requirements",
+                                    echo generateMessageWithLink("/NursingClinical/view/requirements.php", "Clinical Requirements",
                                                                 "Changes were saved successfully");
                                 }
                                 else {
-                                    echo generateMessageWithLink("/Controller/admin/edit-requirements.Controller", "Edit Clinical Requirements",
+                                    echo generateMessageWithLink("/NursingClinical/Controller/admin/edit-requirements.php", "Edit Clinical Requirements",
                                                                 "Please edit Clinical Requirements there and try again",
                                                                 "ERROR: No changes received from Edit Requirements");
                                 }
@@ -119,7 +119,7 @@
                                     }
                                     
                                     // display success, and link to View Entries page
-                                    echo generateMessageWithLink("view-entries.Controller", "View Entries",
+                                    echo generateMessageWithLink("view-entries.php", "View Entries",
                                                                 "Name updated successfully");
                                 }
             
@@ -146,7 +146,7 @@
                                 }
                                 
                                 // display success, and link to View Entries page
-                                echo generateMessageWithLink("edit-requirements.Controller", "Edit Requirements",
+                                echo generateMessageWithLink("edit-requirements.php", "Edit Requirements",
                                                             "Requirement added successfully");
                             ?>
                         </div>
@@ -156,7 +156,7 @@
 
                 else {
 					echo "<div class='col-12 col-md-8'>" 
-							. displayAccessDenied("login.Controller", "Login") .
+							. displayAccessDenied("login.php", "Login") .
 						"</div>";
 				}
             ?>
