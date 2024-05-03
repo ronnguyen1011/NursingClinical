@@ -35,7 +35,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <form action="/php/confirm.php" method="post" id="experience-form">
+                        <form action="/NursingClinical/Controller/confirm.php" method="post" id="experience-form">
                             <!-- Question 1 -->
                             <div class="card p-3 my-1">
                                 <label class="mb-2" for="q1-site-attended">
