@@ -194,7 +194,7 @@
 	<script src="/js/responsive-scrollspy-toggle.js"></script>
 
 	<!--Include export to spreadsheet functionality-->
-	<script src="/js/export-to-spreadsheet.js"></script>
+	<script src="/NursingClinical/js/export-to-spreadsheet.js"></script>
 </body>
 </html>
 
