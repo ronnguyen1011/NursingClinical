@@ -87,8 +87,7 @@ require "nav.php";
                 <!-- File Upload -->
                 <div class="card p-3 my-1">
                     <div class="mb-3">
-                        <label for="formFile" class="form-label">Upload Document: <?php echo displayRequired(); ?></label>
-                        <!--                        <input class="form-control" type="file" id="fileToUpload" name="fileToUpload" multiple required>-->
+                        <label for="formFile" class="form-label">Upload Document(s): <?php echo displayRequired(); ?></label>
                         <input class="form-control" type="file" id="fileToUpload" name="fileToUpload[]" multiple required>
 
                     </div>
