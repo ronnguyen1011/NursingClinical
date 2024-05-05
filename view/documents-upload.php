@@ -25,7 +25,7 @@ require "nav.php";
                 </ul>
             </div>
             <!--Upload File Form -->
-            <form action="" method="post" enctype="multipart/form-data"> <!-- TODO add form action page-->
+            <form action="/NursingClinical/Controller/email-documents.php" method="post" enctype="multipart/form-data"> <!-- TODO add form action page-->
                 <!-- First and Last Name -->
                 <div class="row g-1">
                     <div class="col-md-6">
