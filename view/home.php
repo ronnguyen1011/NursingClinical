@@ -54,17 +54,6 @@ require "nav.php";
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-
-                <?php
-                if ($_SESSION["Admin"] == 1){
-                    echo '<form action="upload.php" method="post" enctype="multipart/form-data">
-                            <input type="file" name="fileToUpload" id="fileToUpload">
-                            <input type="submit" value="Upload File" name="submit">
-                            </form>';
-                }
-                ?>
-
-
                 <!-- Card with content -->
                 <div class="card col-12 my-2">
                     <div class="card-body text-center">
@@ -72,7 +61,18 @@ require "nav.php";
                             improve patient care through training for individuals to advance in their nursing profession journey.</p>
                     </div>
                 </div>
+                <?php
+                if ($_SESSION["Admin"] == 1){
+                    echo '<form action="upload.php" method="post" enctype="multipart/form-data" class="form-container">
+                            <label for="fileToUpload" class="label-text">Choose files to upload to slideshow:</label><br>
+                            <input type="file" name="fileToUpload[]" id="fileToUpload" class="file-input" multiple><br>
+                            <input type="submit" value="Upload Files" name="submit" class="submit-button">
+                          </form>';
+                }
+                ?>
+
                 <!-- End of Card with content -->
+
 
             </div>
             <div class="col-md-1 col-lg-2">
