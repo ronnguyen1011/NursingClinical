@@ -62,18 +62,59 @@ require "nav.php";
                     </div>
                 </div>
                 <?php
-                if ($_SESSION["Admin"] == 1){
-                    echo '<form action="upload.php" method="post" enctype="multipart/form-data" class="form-container">
-                            <label for="fileToUpload" class="label-text">Choose files to upload to slideshow:</label><br>
-                            <input type="file" name="fileToUpload[]" id="fileToUpload" class="file-input" multiple><br>
-                            <input type="submit" value="Upload Files" name="submit" class="submit-button">
-                          </form>';
+                if ($_SESSION["Admin"] == 1) {
+                    $slideshow_folder = $_SERVER['DOCUMENT_ROOT'] . '/public_html' . '/NursingClinical/nursing-images/slideshow/';
+                    $slideshow_files = array_diff(scandir($slideshow_folder), array('.', '..'));
+
+                    echo '<link rel="stylesheet" type="text/css" href="styles.css">
+                            <div class="container">
+                                <div class="row justify-content-center form-container">
+                                    <div class="col-md-6">
+                                        <form action="upload.php" method="post" enctype="multipart/form-data">
+                                            <h5 for="fileToUpload" class="label-text text-center">Choose files to upload to slideshow:</h5>
+                                            <input type="file" name="fileToUpload[]" id="fileToUpload" class="file-input" multiple><br>
+                                            <input type="submit" value="Upload Files" name="submit" class="btn btn-primary btn-block mt-3">
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5 class="text-center">Remove Pictures from Slideshow</h5>
+                                        <form method="post">
+                                            <div class="form-group">
+                                                <label for="fileToRemove">Select a file to remove:</label>
+                                                <select name="fileToRemove" id="fileToRemove" class="form-control">';
+                                                foreach ($slideshow_files as $file) {
+                                                    echo '<option value="' . $file . '">' . $file . '</option>';
+                                                }
+                                                echo '</select>
+                                            </div>
+                                            <input type="submit" value="Remove File" name="submit" class="btn btn-danger btn-block">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>';
+
+                    if (isset($_POST["submit"]) && isset($_POST["fileToRemove"])) {
+                        $fileToRemove = $_POST["fileToRemove"];
+                        $file_path = $slideshow_folder . $fileToRemove;
+
+                        // Check if the file exists
+                        if (file_exists($file_path)) {
+                            echo '<script>
+                                    if (confirm("Do you want to remove ' . $fileToRemove . '?")) {
+                                        // If user confirms, perform file deletion
+                                        window.location.reload();
+                                    }
+                                  </script>';
+
+                            // Perform file deletion if confirmed
+                            unlink($file_path);
+                        }
+                    }
                 }
                 ?>
 
+
                 <!-- End of Card with content -->
-
-
             </div>
             <div class="col-md-1 col-lg-2">
             </div>

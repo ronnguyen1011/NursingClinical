@@ -301,3 +301,8 @@ input.radio-input:hover ~ label.radio-label
     background-color: #45a049;
 }
 
+.btn-block {
+    width: 100%;
+    margin-top: 18px;
+}
+
