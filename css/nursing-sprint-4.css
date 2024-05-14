@@ -306,3 +306,33 @@ input.radio-input:hover ~ label.radio-label
     margin-top: 18px;
 }
 
+/*Form for tutorial*/
+.form-tutorial form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Add this line */
+}
+
+.form-tutorial input[type="text"] {
+    flex: 1; /* Add this line */
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-tutorial button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-tutorial button:hover {
+    background-color: #0056b3;
+}
+
+
+

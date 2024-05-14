@@ -1,75 +1,122 @@
 <?php
+// Function to remove a video
+function removeVideo(&$videos, $id) {
+    foreach ($videos as $key => $video) {
+        if ($video['id'] == $id) {
+            unset($videos[$key]);
+            return;
+        }
+    }
+}
+
+// Function to edit a video title
+function editVideo(&$videos, $id, $newTitle) {
+    foreach ($videos as $key => $video) {
+        if ($video['id'] == $id) {
+            $videos[$key]['title'] = $newTitle;
+            return;
+        }
+    }
+}
+
+// Function to edit a video URL
+function editVideoUrl(&$videos, $id, $newUrl) {
+    foreach ($videos as $key => $video) {
+        if ($video['id'] == $id) {
+            $videos[$key]['url'] = $newUrl;
+            return;
+        }
+    }
+}
+
+// Load videos from file or initialize empty array
+$filePath = 'videos.json';
+if (file_exists($filePath)) {
+    $videos = json_decode(file_get_contents($filePath), true);
+} else {
+    $videos = array();
+}
+
+// Check if remove, edit title, or edit URL action is requested
+if (isset($_GET['action'])) {
+    $action = $_GET['action'];
+    if ($action === 'remove' && isset($_GET['id'])) {
+        $id = $_GET['id'];
+        removeVideo($videos, $id);
+        file_put_contents($filePath, json_encode($videos));
+    } elseif (($action === 'edit' || $action === 'editUrl') && isset($_GET['id'])) {
+        $id = $_GET['id'];
+        if ($action === 'edit' && isset($_GET['title'])) {
+            $newTitle = $_GET['title'];
+            editVideo($videos, $id, $newTitle);
+        } elseif ($action === 'editUrl' && isset($_GET['url'])) {
+            $newUrl = $_GET['url'];
+            editVideoUrl($videos, $id, $newUrl);
+        }
+        file_put_contents($filePath, json_encode($videos));
+    }
+}
+
 // store the current page's title for dynamic HTML generation
 $currPageTitle = "Tutorials";
 require "nav.php";
 ?>
+
 <html>
 <body>
-    <main class="container" id="tutorials">
-        <div class="row">
-            <div class="col-md-2 col-lg-3">
-            </div>
-            <div class="col-12 col-md-8 col-lg-6">
-                <h1 class="card col-12 py-3 mb-1 text-center">
-                    Video Tutorials
-                </h1>
-                <!-- Video Tutorials in cards NO accordion -->
-                <!-- <div class="card p-3 my-1">
-                    <h2 class="text-center">Video One</h2>
-                    <div style="text-align: center">
-                        <iframe width="400" height="225" src="https://www.youtube.com/embed/BHACKCNDMW8?si=WIQpL48arvwzleYU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                </div>
-                <div class="card p-3 my-1">
-                    <h2 class="text-center">Video Two</h2>
-                    <div style="text-align: center">
-                        <iframe width="400" height="225" src="https://www.youtube.com/embed/mdoZdXBpYzU?si=r9yQgkkDJ0w9GjQq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        </div>
-                </div> -->
-
-                <div class="card col-12 my-2 p-3 d-none" id="collapse-tutorials-container">
-                    <button id="collapse-tutorials" class="btn btn-success w-100 py-2 border">
-                        Collapse All Tutorials
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-expand" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708z"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="accordion mb-2 my-2" id="tutorials-accordion">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header text-center">
-                            <button class="accordion-button collapsed" type="button" id="collapse-video-0" data-bs-toggle="collapse" data-bs-target="#video-0" aria-expanded="false" aria-controls="video-0">
-                                Video One
-                            </button>
-                        </h2>
-                        <div id="video-0" class="accordion-collapse collapse" style="text-align: center">
-                            <div class="accordion-body">
-                            <iframe width="400" height="225" src="https://www.youtube.com/embed/mdoZdXBpYzU?si=r9yQgkkDJ0w9GjQq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header text-center">
-                            <button class="accordion-button collapsed" type="button" id="collapse-video-1" data-bs-toggle="collapse" data-bs-target="#video-1" aria-expanded="false" aria-controls="video-1">
-                                Video Two
-                            </button>
-                        </h2>
-                        <div id="video-1" class="accordion-collapse collapse" style="text-align: center">
-                            <div class="accordion-body">
-                                <iframe width="400" height="225" src="https://www.youtube.com/embed/BHACKCNDMW8?si=WIQpL48arvwzleYU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<main class="container" id="tutorials">
+    <div class="row">
+        <div class="col-md-2 col-lg-3">
         </div>
-    </main>
-    <?php
-    // display site footer
-    require_once(LAYOUTS_PATH . "/nursing-footer.php");
-    ?>
+        <div class="col-12 col-md-8 col-lg-6">
+            <h1 class="card col-12 py-3 mb-1 text-center">
+                Video Tutorials
+            </h1>
 
-    <!--Include script that sets up "Collapse All" tutorials button-->
-    <script src="../js/collapse-accordion-items.js"></script>
+            <!-- Loop through videos and generate HTML dynamically -->
+            <?php foreach($videos as $key => $video): ?>
+                <div class="card p-3 my-1">
+                    <h2 class="text-center">
+                        <button class="accordion-button collapsed" type="button" id="collapse-video-<?php echo $key; ?>" data-bs-toggle="collapse" data-bs-target="#video-<?php echo $key; ?>" aria-expanded="false" aria-controls="video-<?php echo $key; ?>">
+                            <?php echo $video['title']; ?>
+                        </button>
+                    </h2>
+                    <div id="video-<?php echo $key; ?>" class="accordion-collapse collapse" style="text-align: center">
+                        <div class="accordion-body">
+                            <?php echo $video['url']; ?>
+                            <?php if (isset($_SESSION["Admin"]) && $_SESSION["Admin"] == 1): ?>
+                                <div class="form-tutorial">
+                                    <p></p>
+                                    <form style="display: inline;" method="get" action="">
+                                        <input type="hidden" name="action" value="edit">
+                                        <input type="hidden" name="id" value="<?php echo $video['id']; ?>">
+                                        <input type="text" name="title" placeholder="New title">
+                                        <button type="submit">Edit Title</button><br><br>
+                                    </form>
+                                    <form style="display: inline;" method="get" action="">
+                                        <input type="hidden" name="action" value="editUrl">
+                                        <input type="hidden" name="id" value="<?php echo $video['id']; ?>">
+                                        <input type="text" name="url" placeholder="New Embedded Code">
+                                        <button type="submit">Edit url</button><br><br>
+                                    </form>
+                                    <form style="display: inline;" method="get" action="">
+                                        <input type="hidden" name="action" value="remove">
+                                        <input type="hidden" name="id" value="<?php echo $video['id']; ?>">
+                                        <button type="submit">Remove</button>
+                                    </form>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+
+        </div>
+    </div>
+</main>
+<?php
+// display site footer
+require_once(LAYOUTS_PATH . "/nursing-footer.php");
+?>
 </body>
 </html>
