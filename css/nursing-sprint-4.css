@@ -1,11 +1,11 @@
 :root {
-    --nursing-primary-color: #60a144;
+    --nursing-primary-color: #2C882B;
     --nursing-primary-color-variant: #0d4722;
-    
+
     --nursing-secondary-color: #eae9e9;
     --nursing-secondary-color-variant: #333333;
 
-    --nursing-accent-color: #69b345;
+    --nursing-accent-color: #6CB443;
 
     --accordion-dropdown-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23a7cf8c'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
 
@@ -14,7 +14,7 @@
     --bs-body-color: var(--nursing-secondary-color-variant);
     --bs-border-color: var(--nursing-primary-color-variant);
     --bs-border-color-translucent: var(--nursing-primary-color-variant);
-    
+
     --bs-danger: #F02D3A;
     --bs-orange: #F28123;
     --bs-green: #1C9B4B;
@@ -25,9 +25,9 @@
 }
 
 [data-bs-theme=dark] {
-    --nursing-primary-color: #0d4722;
+    --nursing-primary-color: #006225;
     --nursing-primary-color-variant: #60a144;
-    
+
     --nursing-secondary-color: #333333;
     --nursing-secondary-color-variant: #fdfdfd;
 }
@@ -152,7 +152,7 @@ a.active {
 
 .card
 , button.accordion-button.collapsed
-, button.accordion-button:not(.collapsed) 
+, button.accordion-button:not(.collapsed)
 , .btn
 , li.list-group-item {
     transition: background-color var(--transition-time), color var(--transition-time);
@@ -266,73 +266,3 @@ input.radio-input:hover ~ label.radio-label
 .bg-orange {
     background: var(--bs-orange);
 }
-
-/*upload picture to slideshow*/
-.form-container {
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f4f4f4;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.form-container label {
-    display: block;
-    margin-bottom: 10px;
-}
-
-.form-container input[type="file"] {
-    display: block;
-    margin-bottom: 20px;
-}
-
-.form-container input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-}
-
-.form-container input[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-.btn-block {
-    width: 100%;
-    margin-top: 18px;
-}
-
-/*Form for tutorial*/
-.form-tutorial form {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Add this line */
-}
-
-.form-tutorial input[type="text"] {
-    flex: 1; /* Add this line */
-    padding: 8px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.form-tutorial button {
-    padding: 8px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.form-tutorial button:hover {
-    background-color: #0056b3;
-}
-
-
-
