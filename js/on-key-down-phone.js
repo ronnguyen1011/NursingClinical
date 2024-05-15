@@ -1,5 +1,3 @@
-
-/* Join Page Scripts */
 // auto-formatting phone number - step 1
 function formatPhoneNumber1() {
     // retrieve value of what user is typing and get by element ID
