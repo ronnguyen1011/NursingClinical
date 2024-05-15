@@ -1,27 +1,27 @@
 <?php
-    /**
-     * A collection of pages visible by ALL USERS in the navigation,
-     * and their corresponding links
-     */
-    $publicNavigationPages = array(
-        "Home" => "/NursingClinical/view/home.php",
-        "Clinical Requirements" => "/NursingClinical/view/requirements.php",
-        "Experience Survey" => "/NursingClinical/view/experience.php",
-        "Tutorials" => "/NursingClinical/view/tutorials.php",
-        "Upload Documents" => "/NursingClinical/view/documents-upload.php",
-        "Discussion Board" => "/NursingClinical/view/discussion-board.php",
-        "Contact" => "/NursingClinical/view/contact.php"
-    );
+/**
+ * A collection of pages visible by ALL USERS in the navigation,
+ * and their corresponding links
+ */
+$publicNavigationPages = array(
+    "Home" => "/NursingClinical/view/home.php",
+    "Clinical Requirements" => "/NursingClinical/view/requirements.php",
+    "Experience Survey" => "/NursingClinical/view/experience.php",
+    "Tutorials" => "/NursingClinical/view/tutorials.php",
+    "Upload Documents" => "/NursingClinical/view/documents-upload.php",
+    "Discussion Board" => "/NursingClinical/view/discussion-board.php",
+    "Contact" => "/NursingClinical/view/contact.php"
+);
 
-    /**
-     * A collection of pages visible by only ADMINS in the navigation,
-     * and their corresponding links
-     */
-    $adminNavigationPages = array( 
-        "View Entries" => "/NursingClinical/Controller/admin/view-entries.php",
-        "Edit Requirements" => "/NursingClinical/Controller/admin/edit-requirements.php",
-        "Log Out" => "/NursingClinical/Controller/admin/logout.php"
-    );
+/**
+ * A collection of pages visible by only ADMINS in the navigation,
+ * and their corresponding links
+ */
+$adminNavigationPages = array(
+    "View Entries" => "/NursingClinical/Controller/admin/view-entries.php",
+    "Edit Requirements" => "/NursingClinical/Controller/admin/edit-requirements.php",
+    "Log Out" => "/NursingClinical/Controller/admin/logout.php"
+);
 ?>
 
 <header class="mb-3">
@@ -38,37 +38,40 @@
             </button>
             <div class="collapse navbar-collapse flex-row-reverse" id="navbar-nav">
                 <div class="navbar-nav">
-                    <?php 
-                        // generate a link for each public navigation page
-                        foreach ($publicNavigationPages as $pageLabel => $pageLink) {
-                            echo "<a class='nav-link" . isActive($pageLabel) . "' href='{$pageLink}'>
-                                    {$pageLabel}
-                                </a>";
-                        }
-                        
-                        // if the user is currently logged on as an admin
-                        if ($_SESSION["Admin"]) {
-                            // generate a link for each admin navigation page
-                            $adminLinks = array();
-                            foreach ($adminNavigationPages as $pageLabel => $pageLink) {
-                                $adminLinks[] = "<a class='dropdown-item" . isActive($pageLabel) . "' href='{$pageLink}'>
-                                                    {$pageLabel}       
-                                                </a>";
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Menu
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <?php
+                            // generate a link for each public navigation page
+                            foreach ($publicNavigationPages as $pageLabel => $pageLink) {
+                                echo "<li><a class='dropdown-item" . isActive($pageLabel) . "' href='{$pageLink}'>
+                                            {$pageLabel}
+                                        </a></li>";
                             }
+                            ?>
+                        </ul>
+                    </div>
 
-                            // break the admin links into a string separated by <hr>'s
-                            $formattedAdminLinks = implode("<hr class='dropdown-divider'>", $adminLinks);
+                    <?php
+                    // if the user is currently logged on as an admin
+                    if ($_SESSION["Admin"]) {
+                        // generate a link for each admin navigation page
+                        echo "<div class='nav-item dropdown'>
+                                    <a class='nav-link dropdown-toggle' href='#' id='adminDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                        Admin
+                                    </a>
+                                    <ul class='dropdown-menu' aria-labelledby='adminDropdown'>";
 
-                            echo "<div class='dropdown-center nav-item'>
-                                        <button class='nav-link dropdown-toggle' type='button' 
-                                            data-bs-toggle='dropdown' aria-expanded='false'>
-                                            " . displayStrong("Admin") . "
-                                        </button>
-                                        <div class='dropdown-menu'>
-                                            {$formattedAdminLinks}
-                                        </div>
-                                    </div>";
+                        foreach ($adminNavigationPages as $pageLabel => $pageLink) {
+                            echo "<li><a class='dropdown-item" . isActive($pageLabel) . "' href='{$pageLink}'>
+                                            {$pageLabel}       
+                                        </a></li>";
                         }
+
+                        echo "</ul></div>";
+                    }
                     ?>
                     <a class="nav-link" id="theme-switcher">
                         <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
