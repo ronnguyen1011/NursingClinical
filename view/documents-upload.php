@@ -25,7 +25,7 @@ require "nav.php";
                 </ul>
             </div>
             <!--Upload File Form -->
-            <form action="/NursingClinical/Controller/email-documents.php" method="post" enctype="multipart/form-data"> <!-- TODO add form action page-->
+            <form action="/NursingClinical/Controller/email-documents.php" method="post" enctype="multipart/form-data">
                 <!-- First and Last Name -->
                 <div class="row g-1">
                     <div class="col-md-6">
@@ -62,7 +62,7 @@ require "nav.php";
                 <!-- Phone number -->
                 <div class="card p-3 my-1">
                     <div class="contact form-floating">
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="" onkeydown="formatPhoneNumber1()"">
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder=""">
                         <label for="phone">Phone Number</label>
                     </div>
                 </div>
