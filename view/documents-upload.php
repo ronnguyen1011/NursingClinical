@@ -62,7 +62,7 @@ require "nav.php";
                 <!-- Phone number -->
                 <div class="card p-3 my-1">
                     <div class="contact form-floating">
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder=""">
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="" onkeydown="formatPhoneNumber1()">
                         <label for="phone">Phone Number</label>
                     </div>
                 </div>

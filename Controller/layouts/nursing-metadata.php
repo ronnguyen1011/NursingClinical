@@ -13,3 +13,5 @@
 
 <!--Include theme switcher-->
 <script src="/NursingClinical/js/theme-switcher.js"></script>
+
+<script src="/NursingClinical/js/on-key-down-phone.js"></script>

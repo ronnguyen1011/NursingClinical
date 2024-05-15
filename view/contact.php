@@ -34,7 +34,9 @@
                         <div class="contact form-floating">
                             <input type="tel" class="form-control" id="phone" name="phone" 
                                 placeholder="" 
-                                pattern="[0-9]{3} [0-9]{3} [0-9]{4}|[0-9]{3}-[0-9]{3}-[0-9]{4}|[0-9]{3}[0-9]{3}[0-9]{4}">
+                                pattern="[0-9]{3} [0-9]{3} [0-9]{4}|[0-9]{3}-[0-9]{3}-[0-9]{4}|[0-9]{3}[0-9]{3}[0-9]{4}"
+                                   onkeydown="formatPhoneNumber1()"
+                            >
                             <label for="phone">Phone Number</label>
                         </div>
                     </div>
