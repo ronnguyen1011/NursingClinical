@@ -66,7 +66,7 @@
                     </div>
                     <?php 
                         // generate scrollspy to track and link requirements
-                        echo generateBootstrapScrollspy($allRequirementTitles, "/NursingClinical/view/home.php");
+                        echo generateBootstrapScrollspy($allRequirementTitles, "/NursingClinical/view/requirements.php");
                     ?>
                 </div>
                 <div class="col-12 col-md-9 col-lg-9">

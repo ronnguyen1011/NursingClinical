@@ -83,20 +83,39 @@ function generateEmailContent() {
     global $name, $email, $phone, $programName, $message;
 
     // setup most of email content
-    $emailContent = "<html lang='en'>
-                        <head>
-                            <title>Nursing Nucleus Contact Page</title>
-                            <style>
-                                ul {
-                                    list-style-type: none;
-                                }
-                            </style>
-                        </head>
-                        <body>
-                        <ul>
-                            <li><b>Name:</b> $name</li>
-                            <li><b>Email:</b> $email</li>
-                           ";
+    $emailContent = "<!DOCTYPE html>
+    <html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+        <title>New File Uploaded</title>
+        <style>
+            .center {
+                text-align: center;
+            }
+            .left-align {
+                text-align: left;
+            }
+            .container{
+                width: 100%;
+            }
+            ul {
+                list-style-type: none;
+            }
+        </style>
+    </head>
+    <body>
+    <div class='container'>
+        <div class='center'>
+            <h2>Green River College Nursing Program</h2>
+            <h2>Nursing Nucleus</h2>
+            <img src='https://www.greenriver.edu/media/content-assets/images/students/academics/degrees-amp-programs/nursing/Nursing-Pic.png' 
+            height='70px' alt='Nursing Logo'>
+        </div>            
+        <ul>
+            <li><b>Name:</b> $name</li>
+            <li><b>Email:</b> $email</li>
+           ";
     // only add the phone number to the message if it was provided
     if ( !empty($phone) ) {
         $emailContent .= "<li><b>Phone:</b> $phone </li>";
