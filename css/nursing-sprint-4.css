@@ -333,3 +333,9 @@ input.radio-input:hover ~ label.radio-label
 .form-tutorial button:hover {
     background-color: #0056b3;
 }
+
+/* scrollspy sticky on admin pages */
+#scrollspy-container {
+    position: sticky;
+    top: 0;
+}
