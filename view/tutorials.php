@@ -83,7 +83,9 @@ require "nav.php";
                     </h2>
                     <div id="video-<?php echo $key; ?>" class="accordion-collapse collapse" style="text-align: center">
                         <div class="accordion-body">
-                            <?php echo $video['url']; ?>
+                            <div class="ratio ratio-16x9">
+                                <?php echo $video['url']; ?>
+                            </div>
                             <?php if (isset($_SESSION["Admin"]) && $_SESSION["Admin"] == 1): ?>
                                 <div class="form-tutorial">
                                     <p></p>
