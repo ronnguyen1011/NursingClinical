@@ -9,7 +9,7 @@ $publicNavigationPages = array(
     "Experience Survey" => "/NursingClinical/view/experience.php",
     "Tutorials" => "/NursingClinical/view/tutorials.php",
     "Upload Documents" => "/NursingClinical/view/documents-upload.php",
-    "Discussion Board" => "/NursingClinical/view/discussion-board.php",
+//    "Discussion Board" => "/NursingClinical/view/discussion-board.php", // TODO: unfinished feature - only front end implemented
     "Contact" => "/NursingClinical/view/contact.php"
 );
 
