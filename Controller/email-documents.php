@@ -66,43 +66,53 @@ $currPageTitle = "Send Email - Uploaded Documents";
                 $documentTitle = $_POST['documentTitle'];
                 $documentDescription = $_POST['documentDescription'];
 
-                // send email ----
-                // setup sending and receiving addresses
-                $sendToAddress = "david.jasmine@student.greenriver.edu"; // TODO: change this to the client's preferred email
-                $sendFromAddress = "NursingNucleus@greenriverdev.com";
 
-                // set up headers for email
-                $boundary = uniqid('np');
-                $headers = "From: $sendFromAddress\r\n";
-                $headers .= "MIME-Version: 1.0\r\n";
-                $headers .= "Content-Type: multipart/mixed; boundary=$boundary\r\n";
+                // send email -------------------
+                // check that all required inputs were submitted on the documents upload form
+                if (!empty($firstName) && !empty($lastName) && !empty($studentId) && !empty($email) && !empty($documentTitle)) {
+                    // setup sending and receiving addresses
+                    $sendToAddress = "david.jasmine@student.greenriver.edu"; // TODO: change this to the client's preferred email
+                    $sendFromAddress = "NursingNucleus@greenriverdev.com";
 
-                $subject = "Nursing Nucleus: New File Uploaded by $firstName $lastName - $documentTitle";
+                    // set up headers for email
+                    $boundary = uniqid('np');
+                    $headers = "From: $sendFromAddress\r\n";
+                    $headers .= "MIME-Version: 1.0\r\n";
+                    $headers .= "Content-Type: multipart/mixed; boundary=$boundary\r\n";
 
-                // message body
-                $message = generateEmailContent($firstName, $lastName, $studentId, $email, $phone, $documentTitle, $documentDescription);
-                $message_body = "--$boundary\r\n";
-                $message_body .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-                $message_body .= "Content-Transfer-Encoding: 7bit\r\n\r\n";
-                $message_body .= $message . "\r\n\r\n";
+                    $subject = "Nursing Nucleus: New File Uploaded by $firstName $lastName - $documentTitle";
 
-                // attach the uploaded files
-                foreach ($filePaths as $filePath) {
-                    $file_attachment = chunk_split(base64_encode(file_get_contents($filePath)));
-                    $file_mime_type = mime_content_type($filePath);
-                    $message_body .= "--$boundary\r\n";
-                    $message_body .= "Content-Type: $file_mime_type; name=\"" . basename($filePath) . "\"\r\n";
-                    $message_body .= "Content-Transfer-Encoding: base64\r\n";
-                    $message_body .= "Content-Disposition: attachment\r\n\r\n";
-                    $message_body .= $file_attachment . "\r\n\r\n";
+                    // message body
+                    $message = generateEmailContent($firstName, $lastName, $studentId, $email, $phone, $documentTitle, $documentDescription);
+                    $message_body = "--$boundary\r\n";
+                    $message_body .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+                    $message_body .= "Content-Transfer-Encoding: 7bit\r\n\r\n";
+                    $message_body .= $message . "\r\n\r\n";
+
+                    // attach the uploaded files
+                    foreach ($filePaths as $filePath) {
+                        $file_attachment = chunk_split(base64_encode(file_get_contents($filePath)));
+                        $file_mime_type = mime_content_type($filePath);
+                        $message_body .= "--$boundary\r\n";
+                        $message_body .= "Content-Type: $file_mime_type; name=\"" . basename($filePath) . "\"\r\n";
+                        $message_body .= "Content-Transfer-Encoding: base64\r\n";
+                        $message_body .= "Content-Disposition: attachment\r\n\r\n";
+                        $message_body .= $file_attachment . "\r\n\r\n";
+                    }
+                    $message_body .= "--$boundary--";
+
+                    // attempt to send email with given data and attachment(s)
+                    if (mail($sendToAddress, $subject, $message_body, $headers)) { // success
+                        echo generateMessage("Thank you! File(s) have been uploaded and sent successfully.");
+                    } else { // error
+                        echo generateMessage("Email sending failed.");
+                    }
                 }
-                $message_body .= "--$boundary--";
-
-                // attempt to send email with given data and attachment(s)
-                if (mail($sendToAddress, $subject, $message_body, $headers)) { // success
-                    echo generateMessage("Thank you! File(s) have been uploaded and sent successfully.");
-                } else { // error
-                    echo generateMessage("Email sending failed.");
+                // otherwise display error and link to documents upload form
+                else {
+                    echo generateMessageWithLink("/NursingClinical/view/documents-upload.php", "Documents Upload Form",
+                        "Please fill out the form and try again",
+                        "ERROR: No submission received from Documents Upload Form");
                 }
                 ?>
             </div>
