@@ -8,10 +8,9 @@ Hosted through WH4S and managed on cPanel.
 - [Description](#description)
 - [Installation](#installation)
 - [Tutorial](#tutorial)
-- [Demo](#tutorDemoial)
+- [Demo](#demo)
 - [Configuration](#configuration)
-- [Authors and Acknowledgments](#authors)
-
+- [Authors and Acknowledgments](#authors-and-acknowledgments)
 
 ## Description
 
@@ -26,10 +25,12 @@ The Nursing Clinical Website is designed to provide an information portal for st
 - cPanel access (for hosting management)
 
 ## Tutorial
-    - This video will show case how to use SSH session in PHP Storm.
+
+- This video will showcase how to use SSH session in PHP Storm.
 
 ## Demo
-    - This video will show case the website. 
+
+- This video will showcase the website.
 
 ## Configuration
 
