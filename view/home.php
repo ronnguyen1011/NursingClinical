@@ -143,36 +143,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit_upload"])) {
                 $slideshow_files = array_diff(scandir($slideshow_folder), array('.', '..'));
 
                 echo '<link rel="stylesheet" type="text/css" href="styles.css">
-                            <div class="container">
-                                <div class="row justify-content-center form-container">
-                                    <div class="col-md-6">
-                                        <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateFiles()">
-                                            <h5 for="fileToUpload" class="label-text text-center">Choose files to upload to slideshow:</h5>
-                                            <input type="file" name="fileToUpload[]" id="fileToUpload" class="file-input" accept="image/*" multiple><br>'
-                    .$status.
-                    '<input type="submit" value="Upload Files" name="submit_upload" class="btn btn-primary btn-block mt-3">
-                                        </form>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h5 class="text-center">Remove Pictures from Slideshow</h5>
-                                        <form method="post">
-                                            <div class="form-group">
-                                                <label for="fileToRemove">Select a file to remove:</label>
-                                                <select name="fileToRemove" id="fileToRemove" class="form-control">';
-                foreach ($slideshow_files as $file) {
-                    echo '<option value="' . $file . '">' . $file . '</option>';
-                }
-                echo '</select>
-                                            </div>
-                                            <input type="submit" value="Remove File" name="submit_remove" class="btn btn-danger btn-block">
-                                        </form>
-                                    </div>
+                    <div class="container">
+                        <div class="row justify-content-center form-container">
+                            <div class="col-md-6">
+                                <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateFiles()">
+                                    <h5 for="fileToUpload" class="label-text text-center">Choose files to upload to slideshow:</h5>
+                                    <input type="file" name="fileToUpload[]" id="fileToUpload" class="file-input" accept="image/*" multiple><br>'
+                                . $status .
+                                '<input type="submit" value="Upload Files" name="submit_upload" class="btn btn-primary btn-block mt-3">
+                                </form>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="text-center">Remove Pictures from Slideshow</h5>
+                                <form method="post">
+                                    <div class="form-group">
+                                        <label for="fileToRemove">Select a file to remove:</label>
+                                        <select name="fileToRemove" id="fileToRemove" class="form-control" onchange="updateViewPictureLink()">';
+                            $picture_view= "https://" . $_SERVER['HTTP_HOST'] . "/NursingClinical/nursing-images/slideshow/";
+                            $selected_option = isset($_POST['fileToRemove']) ? $_POST['fileToRemove'] : '';
+                            foreach ($slideshow_files as $file) {
+                                echo '<option value="' . $file . '">' . $file . '</option>';
+                            }
+                            echo '</select>
                                 </div>
-                            </div>';
+                                <input type="submit" value="Remove File" name="submit_remove" class="btn btn-danger btn-block">
+                                <div id="viewPictureLink">
+                                    <p>Select an option to view picture</p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>';
             }
             ?>
         </div>
         <div class="col-md-1 col-lg-2"></div>
+        <script>
+            function updateViewPictureLink() {
+                const fileSelect = document.getElementById('fileToRemove');
+                const selectedFile = fileSelect.options[fileSelect.selectedIndex].value;
+                const pictureView = 'https://' + window.location.host + '/NursingClinical/nursing-images/slideshow/';
+                const viewPictureLink = document.getElementById('viewPictureLink');
+                viewPictureLink.innerHTML = '<a href="' + pictureView + selectedFile + '" target="_blank">View Picture: </a>'+ selectedFile;
+            }
+        </script>
     </div>
 </main>
 <?php
