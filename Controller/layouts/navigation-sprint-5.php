@@ -8,7 +8,7 @@ $publicNavigationPages = array(
     "Clinical Requirements" => "/NursingClinical/view/requirements.php",
     "Experience Survey" => "/NursingClinical/view/experience.php",
     "Tutorials" => "/NursingClinical/view/tutorials.php",
-    "Upload Documents" => "/NursingClinical/view/documents-upload.php",
+//    "Upload Documents" => "/NursingClinical/view/documents-upload.php", <!------ NOTE: Documents Upload Feature REMOVED due to security and HIPAA and FERPA concerns ----->
 //    "Discussion Board" => "/NursingClinical/view/discussion-board.php", // TODO: unfinished feature - only front end implemented
     "Contact" => "/NursingClinical/view/contact.php"
 );
