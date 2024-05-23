@@ -149,8 +149,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit_upload"])) {
                                         <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateFiles()">
                                             <h5 for="fileToUpload" class="label-text text-center">Choose files to upload to slideshow:</h5>
                                             <input type="file" name="fileToUpload[]" id="fileToUpload" class="file-input" accept="image/*" multiple><br>'
-                                            .$status.
-                                            '<input type="submit" value="Upload Files" name="submit_upload" class="btn btn-primary btn-block mt-3">
+                    .$status.
+                    '<input type="submit" value="Upload Files" name="submit_upload" class="btn btn-primary btn-block mt-3">
                                         </form>
                                     </div>
                                     <div class="col-md-6">
