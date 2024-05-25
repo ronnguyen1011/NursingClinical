@@ -15,11 +15,13 @@ if (isset($_POST["submit_remove"]) && isset($_POST["fileToRemove"])) {
     // Check if the file exists and remove it
     if (file_exists($file_path)) {
         unlink($file_path);
-        echo "<script>alert('File removed successfully');</script>";
+        echo "<script>alert('File ".$fileToRemove." removed successfully');</script>";
     } else {
-        echo "<script>alert('File does not exist');</script>";
+        echo "<script>alert('File ".$fileToRemove." does not exist');</script>";
     }
 }
+
+$status = "";
 
 $status = "";
 
@@ -28,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit_upload"])) {
     $target_dir = $_SERVER['DOCUMENT_ROOT'].'/public_html/NursingClinical/nursing-images/slideshow/';
     $validTypes = array('jpg', 'jpeg', 'png', 'gif');
     $uploadOk = 1;
+    $uploadedFiles = []; // Array to store uploaded files
 
     foreach ($_FILES["fileToUpload"]["name"] as $key => $name) {
         $target_file = $target_dir . basename($name);
@@ -35,30 +38,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit_upload"])) {
 
         // Check if file type is valid
         if (!in_array($imageFileType, $validTypes)) {
-            $status = '<p class="text-danger">Sorry, only JPG, JPEG, PNG & GIF files are allowed.</p>';
+            $status .= '<p class="text-danger">Sorry, only JPG, JPEG, PNG & GIF files are allowed for ' . htmlspecialchars($name) . '.</p>';
             $uploadOk = 0;
         }
 
         // Check if file already exists
         if (file_exists($target_file)) {
-            $status = '<p class="text-danger">Sorry, file already exists.</p>';
+            $status .= '<p class="text-danger">Sorry, ' . htmlspecialchars($name) . ' already exists.</p>';
             $uploadOk = 0;
         }
 
         // Check file size (optional)
         if ($_FILES["fileToUpload"]["size"][$key] > 5000000) { // 5MB limit
-            $status = '<p class="text-danger">Sorry, your file is too large.</p>';
+            $status .= '<p class="text-danger">Sorry, ' . htmlspecialchars($name) . ' is too large.</p>';
             $uploadOk = 0;
         }
 
         // If everything is ok, try to upload file
         if ($uploadOk == 1) {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"][$key], $target_file)) {
-                $status = '<p class="text-danger">The file '. htmlspecialchars(basename($name)). ' has been uploaded.</p>';
+                $uploadedFiles[] = $name;
+                $status .= '<p class="text-success">The file '. htmlspecialchars($name). ' has been uploaded.</p>';
             } else {
-                $status = '<p class="text-danger">Sorry, there was an error uploading your file.</p>';
+                $status .= '<p class="text-danger">Sorry, there was an error uploading ' . htmlspecialchars($name) . '.</p>';
             }
         }
+    }
+
+    // Display uploaded files if any
+    if (!empty($uploadedFiles)) {
+        $status .= '<p class="text-success">Uploaded files: ' . implode(", ", $uploadedFiles) . '</p>';
     }
 }
 ?>
