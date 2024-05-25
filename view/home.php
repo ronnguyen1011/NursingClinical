@@ -184,7 +184,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit_upload"])) {
                 const selectedFile = fileSelect.options[fileSelect.selectedIndex].value;
                 const pictureView = 'https://' + window.location.host + '/NursingClinical/nursing-images/slideshow/';
                 const viewPictureLink = document.getElementById('viewPictureLink');
-                viewPictureLink.innerHTML = '<a href="' + pictureView + selectedFile + '" target="_blank">View Picture: </a>'+ selectedFile;
+                viewPictureLink.innerHTML = '<a href="' + pictureView + selectedFile + '" target="_blank">View Picture:</a>'+ " " +selectedFile;
             }
         </script>
     </div>
