@@ -155,7 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit_upload"])) {
                             </div>
                             <div class="col-md-6">
                                 <h5 class="text-center">Remove Pictures from Slideshow</h5>
-                                <form method="post">
+                                <form action="home.php" method="post" onsubmit="return confirmFileRemoval()">
                                     <div class="form-group">
                                         <label for="fileToRemove">Select a file to remove:</label>
                                         <select name="fileToRemove" id="fileToRemove" class="form-control" onchange="updateViewPictureLink()">';
@@ -196,5 +196,13 @@ require_once(LAYOUTS_PATH . "/nursing-footer.php");
 <!--Include script that sets up "Collapse All" requirements button-->
 <script src="/js/collapse-accordion-items.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    function confirmFileRemoval() {
+        if (confirm('Do you want to delete the picture?')) {
+            return true;
+        }
+        return false;
+    }
+</script>
 </body>
 </html>
