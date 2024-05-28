@@ -38,19 +38,19 @@ if (file_exists($filePath)) {
 }
 
 // Check if remove, edit title, or edit URL action is requested
-if (isset($_GET['action'])) {
-    $action = $_GET['action'];
-    if ($action === 'remove' && isset($_GET['id'])) {
-        $id = $_GET['id'];
+if (isset($_POST['action'])) {
+    $action = $_POST['action'];
+    if ($action === 'remove' && isset($_POST['id'])) {
+        $id = $_POST['id'];
         removeVideo($videos, $id);
         file_put_contents($filePath, json_encode($videos));
-    } elseif (($action === 'edit' || $action === 'editUrl') && isset($_GET['id'])) {
-        $id = $_GET['id'];
-        if ($action === 'edit' && isset($_GET['title'])) {
-            $newTitle = $_GET['title'];
+    } elseif (($action === 'edit' || $action === 'editUrl') && isset($_POST['id'])) {
+        $id = $_POST['id'];
+        if ($action === 'edit' && isset($_POST['title'])) {
+            $newTitle = $_POST['title'];
             editVideo($videos, $id, $newTitle);
-        } elseif ($action === 'editUrl' && isset($_GET['url'])) {
-            $newUrl = $_GET['url'];
+        } elseif ($action === 'editUrl' && isset($_POST['url'])) {
+            $newUrl = $_POST['url'];
             editVideoUrl($videos, $id, $newUrl);
         }
         file_put_contents($filePath, json_encode($videos));
@@ -89,19 +89,19 @@ require "nav.php";
                             <?php if (isset($_SESSION["Admin"]) && $_SESSION["Admin"] == 1): ?>
                                 <div class="form-tutorial">
                                     <p></p>
-                                    <form style="display: inline;" method="get" action="">
+                                    <form style="display: inline;" method="post" action="">
                                         <input type="hidden" name="action" value="edit">
                                         <input type="hidden" name="id" value="<?php echo $video['id']; ?>">
                                         <input type="text" name="title" placeholder="New title">
                                         <button type="submit">Edit Title</button><br><br>
                                     </form>
-                                    <form style="display: inline;" method="get" action="">
+                                    <form style="display: inline;" method="post" action="">
                                         <input type="hidden" name="action" value="editUrl">
                                         <input type="hidden" name="id" value="<?php echo $video['id']; ?>">
                                         <input type="text" name="url" placeholder="New Embedded Code">
                                         <button type="submit">Edit url</button><br><br>
                                     </form>
-                                    <form style="display: inline;" method="get" action="">
+                                    <form style="display: inline;" method="post" action="">
                                         <input type="hidden" name="action" value="remove">
                                         <input type="hidden" name="id" value="<?php echo $video['id']; ?>">
                                         <button type="submit">Remove</button>
@@ -122,3 +122,4 @@ require_once(LAYOUTS_PATH . "/nursing-footer.php");
 ?>
 </body>
 </html>
+
