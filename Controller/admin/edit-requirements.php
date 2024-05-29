@@ -106,8 +106,53 @@ while ($currRow = mysqli_fetch_assoc($allRequirements)) {
         </div>
     </main>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.delete-requirement').click(function() {
+                var requirementID = $(this).data('requirement-id');
+                var requirementTitle = $(this).data('title');
+
+                if (confirm('Are you sure you want to delete this requirement?')) {
+                    // Debug output
+                    console.log("RequirementID to be deleted:", requirementID);
+
+                    // Perform AJAX request to delete the requirement
+                    $.ajax({
+                        url: '/NursingClinical/Controller/admin/update-database.php?operation=delete-requirement',
+                        method: 'POST',
+                        data: { RequirementID: requirementID }, // Ensure that the key matches the parameter name expected in the backend
+                        success: function(response) {
+                            console.log("Success: ", response);
+                            // Optionally, remove the deleted requirement card from the UI
+                            $('#spy-' + requirementID).remove();
+                            // Display a success message or confirmation
+                            alert("Requirement deleted successfully.");
+                            // Reload the page
+                            window.location.reload();
+                            // Scroll to the top of the page by setting the hash to an empty string
+                            window.location.hash = '';
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error
+                            console.error(error);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+
+
+
+
     <!--Include dynamic scrollspy for mobile-->
     <script src="/js/responsive-scrollspy-toggle.js"></script>
+
+
+
+
     </body>
     </html>
 
@@ -151,7 +196,12 @@ function generateAddRequirementModal() {
  * @return string a Bootstrap Card containing the given values placed within individual Bootstrap Floating Label inputs so they may be edited
  */
 function generateRequirementInputs($requirementID, $title, $notes, $option1, $option2) {
+    /**
+     * Global counter of # of HTML elements tracked by scrollspy
+     */
     global $scrollspyElementsCount;
+
+    // another element is tracked by scrollspy
     $scrollspyElementsCount++;
 
     // generate requirement inputs using given data and place within Card
@@ -160,18 +210,8 @@ function generateRequirementInputs($requirementID, $title, $notes, $option1, $op
                 " . generateBootstrapFloatingTextBox("{$requirementID}-RequirementNotes", "Notes", false, $notes) . "
                 " . generateBootstrapFloatingTextArea("{$requirementID}-Option1", "Option 1", true, $option1) . "
                 " . generateBootstrapFloatingTextArea("{$requirementID}-Option2", "Option 2", false, $option2) . "
-                <div class='row mt-2'>
-                    <div class='col-12'>
-                        <form action='/NursingClinical/Controller/admin/update-database.php?operation=delete-requirement' method='post'>
-                            <input type='hidden' name='RequirementID' value='{$requirementID}'>
-                            <button type='submit' class='btn btn-danger w-100 mx-auto d-block'>Delete</button>
-                        </form>
-                    </div>
-                </div>
+               <button type='button' class='btn btn-danger mt-2 delete-requirement' data-requirement-id='{$requirementID}' data-requirement-title='{$title}'>Delete</button>
             </div>";
+
 }
-
-
-
-
 ?>
