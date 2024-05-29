@@ -118,8 +118,8 @@ require "nav.php";
                                     <label for="videoUrl" class="form-label">Video URL:</label><br>
                                     <input type="text" class="mx-auto p-1 w-100" name="url" id="videoUrl" placeholder="Paste the embedded code of the video" required>
                                 </div>
-                                <div class="d-grid">
-                                    <button type="submit" class="btn w-25 mx-auto btn-primary">Add Video</button>
+                                <div class="d-grid col-12 col-md-3 mx-auto">
+                                    <button type="submit" class="btn btn-primary">Add Video</button>
                                 </div>
                             </form>
                         </div>
