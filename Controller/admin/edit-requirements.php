@@ -106,6 +106,7 @@ while ($currRow = mysqli_fetch_assoc($allRequirements)) {
         </div>
     </main>
 
+    <!--- Script for Delete Requirement feature --->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -144,13 +145,8 @@ while ($currRow = mysqli_fetch_assoc($allRequirements)) {
     </script>
 
 
-
-
-
     <!--Include dynamic scrollspy for mobile-->
     <script src="/js/responsive-scrollspy-toggle.js"></script>
-
-
 
 
     </body>

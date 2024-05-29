@@ -1,4 +1,6 @@
 <?php
+session_start(); // Ensure the session is started
+
 // Function to remove a video
 function removeVideo(&$videos, $id) {
     foreach ($videos as $key => $video) {
@@ -29,6 +31,27 @@ function editVideoUrl(&$videos, $id, $newUrl) {
     }
 }
 
+// Function to generate a new ID
+function generateNewId($videos) {
+    $maxId = 0;
+    foreach ($videos as $video) {
+        if ($video['id'] > $maxId) {
+            $maxId = $video['id'];
+        }
+    }
+    return $maxId + 1;
+}
+
+// Function to add a new video
+function addVideo(&$videos, $title, $url) {
+    $id = generateNewId($videos);
+    $videos[] = array(
+        'id' => $id,
+        'title' => $title,
+        'url' => $url
+    );
+}
+
 // Load videos from file or initialize empty array
 $filePath = 'videos.json';
 if (file_exists($filePath)) {
@@ -37,7 +60,7 @@ if (file_exists($filePath)) {
     $videos = array();
 }
 
-// Check if remove, edit title, or edit URL action is requested
+// Check if remove, edit title, edit URL, or add action is requested
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
     if ($action === 'remove' && isset($_POST['id'])) {
@@ -54,10 +77,15 @@ if (isset($_POST['action'])) {
             editVideoUrl($videos, $id, $newUrl);
         }
         file_put_contents($filePath, json_encode($videos));
+    } elseif ($action === 'add' && isset($_POST['title']) && isset($_POST['url'])) {
+        $title = $_POST['title'];
+        $url = $_POST['url'];
+        addVideo($videos, $title, $url);
+        file_put_contents($filePath, json_encode($videos));
     }
 }
 
-// store the current page's title for dynamic HTML generation
+// Store the current page's title for dynamic HTML generation
 $currPageTitle = "Tutorials";
 require "nav.php";
 ?>
@@ -72,6 +100,32 @@ require "nav.php";
             <h1 class="card col-12 py-3 mb-1 text-center">
                 Video Tutorials
             </h1>
+            <!-- Add New Video when logged in as Admin -->
+            <?php if (isset($_SESSION["Admin"]) && $_SESSION["Admin"] == 1): ?>
+                <div class="card p-3 my-1">
+                    <button class="accordion-button mx-auto d-block text-center" type="button" id="collapse-add-video" data-bs-toggle="collapse" data-bs-target="#add-video" aria-expanded="true" aria-controls="add-video">
+                        <h2>Add New Video</h2>
+                    </button>
+                    <div id="add-video" class="accordion-collapse collapse show">
+                        <div class="accordion-body px-5">
+                            <form method="post" action="">
+                                <input type="hidden" name="action" value="add">
+                                <div class="mb-3">
+                                    <label for="videoTitle" class="form-label">Video Title:</label><br>
+                                    <input type="text" class="mx-auto p-1 w-100" name="title" id="videoTitle" placeholder="Enter the title of the video" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="videoUrl" class="form-label">Video URL:</label><br>
+                                    <input type="text" class="mx-auto p-1 w-100" name="url" id="videoUrl" placeholder="Paste the embedded code of the video" required>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn w-25 mx-auto btn-primary">Add Video</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
 
             <!-- Loop through videos and generate HTML dynamically -->
             <?php foreach($videos as $key => $video): ?>
@@ -89,18 +143,19 @@ require "nav.php";
                             <?php if (isset($_SESSION["Admin"]) && $_SESSION["Admin"] == 1): ?>
                                 <div class="form-tutorial">
                                     <p></p>
-                                    <form style="display: inline;" method="post" action="">
+                                    <form id="edit-form" style="display: inline;" method="post" action="">
                                         <input type="hidden" name="action" value="edit">
                                         <input type="hidden" name="id" value="<?php echo $video['id']; ?>">
                                         <input type="text" name="title" placeholder="New title">
-                                        <button type="submit">Edit Title</button><br><br>
+                                        <button type="submit" onclick="return validateForm('title')">Edit Title</button><br><br>
                                     </form>
-                                    <form style="display: inline;" method="post" action="">
+                                    <form id="editUrl-form" style="display: inline;" method="post" action="">
                                         <input type="hidden" name="action" value="editUrl">
                                         <input type="hidden" name="id" value="<?php echo $video['id']; ?>">
                                         <input type="text" name="url" placeholder="New Embedded Code">
-                                        <button type="submit">Edit url</button><br><br>
+                                        <button type="submit" onclick="return validateForm('url')">Edit URL</button><br><br>
                                     </form>
+
                                     <form style="display: inline;" method="post" action="">
                                         <input type="hidden" name="action" value="remove">
                                         <input type="hidden" name="id" value="<?php echo $video['id']; ?>">
@@ -112,14 +167,32 @@ require "nav.php";
                     </div>
                 </div>
             <?php endforeach; ?>
-
         </div>
     </div>
+
 </main>
 <?php
-// display site footer
+// Display site footer
 require_once(LAYOUTS_PATH . "/nursing-footer.php");
 ?>
+<!--- Form Validation for Edit title and Edit url fields --->
+<script>
+    function validateForm(field) {
+        var fieldValue;
+        var fieldLabel;
+        if (field === 'title') {
+            fieldValue = document.forms["edit-form"][field].value;
+            fieldLabel = "New Title";
+        } else if (field === 'url') {
+            fieldValue = document.forms["editUrl-form"][field].value;
+            fieldLabel = "New Embedded Code";
+        } // if input field is empty display alert
+        if (fieldValue == '') {
+            alert("Please enter a value for " + fieldLabel);
+            return false;
+        }
+        return true;
+    }
+</script>
 </body>
 </html>
-
