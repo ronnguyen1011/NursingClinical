@@ -23,7 +23,7 @@
                     </div>
                     <div class="card p-3 my-1">
                         <div class="contact form-floating">
-                        <input type="email" class="form-control" id="email" name="email" 
+                        <input type="email" class="form-control" id="email" name="email"
                             placeholder="" required>
                         <label for="email">
                             Email Address <?php echo displayRequired(); ?>
@@ -32,8 +32,8 @@
                     </div>
                     <div class="card p-3 my-1">
                         <div class="contact form-floating">
-                            <input type="tel" class="form-control" id="phone" name="phone" 
-                                placeholder="" 
+                            <input type="tel" class="form-control" id="phone" name="phone"
+                                placeholder=""
                                    onkeydown="formatPhoneNumber1()"
                             >
                             <label for="phone">Phone Number</label>
@@ -57,15 +57,105 @@
                         </div>
                     </div>
                     <div class="card p-3 my-1">
+                        <?php
+                        $filePath = $_SERVER['DOCUMENT_ROOT'].'/public_html/NursingClinical/Controller/emailContact.json';
+                        $emailConfig = json_decode(file_get_contents($filePath), true);
+
+                        // Check if the user is an admin and has the necessary session variable
+                        if (isset($_SESSION["Admin"]) && $_SESSION["Admin"] == 1) {
+                            // Display the email addresses from the JSON file
+                            echo "Sent To: " . $emailConfig["sendToAddress"] . "<br>";
+                            echo "Send From: " . $emailConfig["sendFromAddress"] . "<br>";
+                        }
+                        ?>
+                    </div>
+                    <div class="card p-3 my-1">
                         <button class="btn btn-success py-2 border" id="submit-contact">Submit</button>
                     </div>
+
                 </form>
+                <?php
+                // Function to update the JSON file with new email addresses
+                function updateEmailConfig($newSendToAddress, $newSendFromAddress) {
+                    // Read the JSON file
+                    $filePath = $_SERVER['DOCUMENT_ROOT'].'/public_html/NursingClinical/Controller/emailContact.json';
+                    $emailConfig = json_decode(file_get_contents($filePath), true);
+
+                    // Update email addresses
+                    $emailConfig['sendToAddress'] = $newSendToAddress;
+                    $emailConfig['sendFromAddress'] = $newSendFromAddress;
+
+                    // Write updated data back to the JSON file
+                    file_put_contents($filePath, json_encode($emailConfig, JSON_PRETTY_PRINT));
+                }
+
+                // Check if the form is submitted
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    // Get new email addresses from the form
+                    $newSendToAddress = $_POST["newSendToAddress"];
+                    $newSendFromAddress = $_POST["newSendFromAddress"];
+
+                    // Update the JSON file with new email addresses
+                    updateEmailConfig($newSendToAddress, $newSendFromAddress);
+                }
+                ?>
+
+                <div class="card p-3 my-1">
+                    <form id="emailForm" action="contact.php" method="post">
+                        <div class="mb-3">
+                            <label for="newSendToAddress" class="form-label">Sent To:</label>
+                            <input type="email" class="form-control" id="newSendToAddress" name="newSendToAddress" value="<?php echo $emailConfig['sendToAddress']; ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="newSendFromAddress" class="form-label">Send From:</label>
+                            <input type="email" class="form-control" id="newSendFromAddress" name="newSendFromAddress" value="<?php echo $emailConfig['sendFromAddress']; ?>" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Email Addresses</button>
+                    </form>
+                </div>
+
+                <script>
+                    document.getElementById('emailForm').addEventListener('submit', function(event) {
+                        event.preventDefault(); // Prevent the default form submission
+
+                        const sendToAddress = document.getElementById('newSendToAddress').value;
+                        const sendFromAddress = document.getElementById('newSendFromAddress').value;
+
+                        // Basic email validation
+                        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailPattern.test(sendToAddress) || !emailPattern.test(sendFromAddress)) {
+                            alert('Please enter valid email addresses.');
+                            return;
+                        }
+
+                        const formData = new FormData(this);
+
+                        // Use fetch API to submit the form data
+                        fetch('contact.php', {
+                            method: 'POST',
+                            body: formData
+                        }).then(response => {
+                            if (response.ok) {
+                                // Reload the page after successful form submission
+                                location.reload();
+                            } else {
+                                // Handle errors if needed
+                                alert('There was an issue with the form submission.');
+                            }
+                        }).catch(error => {
+                            // Handle errors if needed
+                            console.error('Error:', error);
+                        });
+                    });
+                </script>
+
+
             </div>
             <div class="col-md-2 col-lg-3">
             </div>
         </div>
     </main>
-    <?php 
+    <?php
         // display site footer
         require_once(LAYOUTS_PATH . "/nursing-footer.php");
     ?>

@@ -23,8 +23,6 @@ if (isset($_POST["submit_remove"]) && isset($_POST["fileToRemove"])) {
 
 $status = "";
 
-$status = "";
-
 // Function to handle file upload
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit_upload"])) {
     $target_dir = $_SERVER['DOCUMENT_ROOT'].'/public_html/NursingClinical/nursing-images/slideshow/';
