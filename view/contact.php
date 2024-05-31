@@ -102,7 +102,6 @@
 
                 <!-- Change email address form -->
                 <div class="card p-3 my-1">
-                    <h3 class="mx-auto text-center">Update Email Addresses</h3>
                     <form id="emailForm" action="contact.php" method="post">
                         <div class="mb-3">
                             <label for="newSendToAddress" class="form-label">
@@ -119,7 +118,7 @@
                             <input type="email" class="form-control" id="newSendFromAddress" name="newSendFromAddress" value="<?php echo htmlspecialchars($emailConfig['sendFromAddress']); ?>" required>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <button type="submit" class="text-center mx-auto btn btn-primary">Update</button>
+                            <button type="submit" class="text-center mx-auto btn btn-primary">Update Email Addresses</button>
                         </div>
                     </form>
                 </div>
