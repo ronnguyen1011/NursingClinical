@@ -57,20 +57,20 @@
                         </div>
                     </div>
                     <div class="card p-3 my-1">
+                        <button class="btn btn-success py-2 border" id="submit-contact">Submit</button>
+                    </div>
+
+                    <!-- Display Current Email Addresses for Contact Form-->
+                    <?php if (isset($_SESSION["Admin"]) && $_SESSION["Admin"] == 1): ?>
+                    <div class="card p-3 mt-3 my-1">
                         <?php
                         $filePath = $_SERVER['DOCUMENT_ROOT'].'/public_html/NursingClinical/Controller/emailContact.json';
                         $emailConfig = json_decode(file_get_contents($filePath), true);
 
-                        // Check if the user is an admin and has the necessary session variable
-                        if (isset($_SESSION["Admin"]) && $_SESSION["Admin"] == 1) {
                             // Display the email addresses from the JSON file
-                            echo "Sent To: " . $emailConfig["sendToAddress"] . "<br>";
-                            echo "Send From: " . $emailConfig["sendFromAddress"] . "<br>";
-                        }
+                            echo "<div><strong>Sent To:</strong> " . $emailConfig["sendToAddress"] . "<br></div>";
+                            echo "<div><strong>Send From:</strong> " . $emailConfig["sendFromAddress"] . "<br></div>";
                         ?>
-                    </div>
-                    <div class="card p-3 my-1">
-                        <button class="btn btn-success py-2 border" id="submit-contact">Submit</button>
                     </div>
 
                 </form>
@@ -100,19 +100,30 @@
                 }
                 ?>
 
+                <!-- Change email address form -->
                 <div class="card p-3 my-1">
                     <form id="emailForm" action="contact.php" method="post">
                         <div class="mb-3">
-                            <label for="newSendToAddress" class="form-label">Sent To:</label>
-                            <input type="email" class="form-control" id="newSendToAddress" name="newSendToAddress" value="<?php echo $emailConfig['sendToAddress']; ?>" required>
+                            <label for="newSendToAddress" class="form-label">
+                                <strong>Sent To</strong>
+                                <small class="form-text text-muted">(Email Address to Receive Contact Form Messages)</small>
+                            </label>
+                            <input type="email" class="form-control" id="newSendToAddress" name="newSendToAddress" value="<?php echo htmlspecialchars($emailConfig['sendToAddress']); ?>" required>
                         </div>
                         <div class="mb-3">
-                            <label for="newSendFromAddress" class="form-label">Send From:</label>
-                            <input type="email" class="form-control" id="newSendFromAddress" name="newSendFromAddress" value="<?php echo $emailConfig['sendFromAddress']; ?>" required>
+                            <label for="newSendFromAddress" class="form-label">
+                                <strong>Send From</strong>
+                                <small class="form-text text-muted">(Email Address to Send Messages From)</small>
+                            </label>
+                            <input type="email" class="form-control" id="newSendFromAddress" name="newSendFromAddress" value="<?php echo htmlspecialchars($emailConfig['sendFromAddress']); ?>" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Update Email Addresses</button>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="text-center mx-auto btn btn-primary">Update Email Addresses</button>
+                        </div>
                     </form>
                 </div>
+                <?php endif; ?>
+
 
                 <script>
                     document.getElementById('emailForm').addEventListener('submit', function(event) {
