@@ -40,7 +40,7 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`userID`, `FirstName`, `LastName`, `Email`, `Password`) VALUES
-(1, 'Christy', '', 'christy@greenriver.edu', 'ilovegeckoteam');
+(1, 'Christie', 'Savage', 'csavage@greenriver.edu', 'ilovegeckoteam');
 
 --
 -- Indexes for dumped tables
